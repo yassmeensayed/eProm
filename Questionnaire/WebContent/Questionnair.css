@@ -1,0 +1,30 @@
+#MainContainer {
+	
+	margin: 0 auto;
+	text-align: center;
+	border-style: double;
+	width: 80%;
+}
+.notice{
+	text-decoration: underline;
+	font-weight: bold;
+}
+.questionHeader{
+	background-color: #990000;
+	color:white;
+	margin-right: 2%;
+}
+#questions{
+	margin : 0 auto;
+}
+#question1{
+	text-align: center;
+}
+#question1 td{
+	border-bottom:thin;
+	border-bottom-style:solid;
+	border-bottom-color: red;
+}
+#question1 tr td:first-child{
+	text-align: left;
+}
