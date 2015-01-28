@@ -8,6 +8,7 @@
 .notice{
 	text-decoration: underline;
 	font-weight: bold;
+	font-style: italic; 
 }
 .questionHeader{
 	background-color: #990000;
@@ -27,4 +28,45 @@
 }
 #question1 tr td:first-child{
 	text-align: left;
+}
+
+.ruler, .ruler li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+}
+/* IE6-7 Fix */
+.ruler, .ruler li {
+    *display: inline;
+}
+.ruler {
+    background: -webkit-linear-gradient(left, rgb(247, 222, 222) , rgb(253, 2, 12));; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, rgb(247, 222, 222) , rgb(253, 2, 12));; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gsradient(right, rgb(247, 222, 222) , rgb(253, 2, 12)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, rgb(247, 222, 222) , rgb(253, 2, 12));
+    box-shadow: 0 -1px 1em hsl(60, 60%, 84%) inset;
+    border-radius: 2px;
+    border: 1px solid #000;
+    color: #000;
+    margin: 0;
+    height: 1.7em;
+    padding-right: 1cm;
+    white-space: nowrap;
+}
+.ruler li {
+    padding-left: 1cm;
+    width: 1em ;
+/*     margin: .64em -1em -.64em; */
+    text-align: center;
+    position: relative;
+    text-shadow: 1px 1px hsl(60, 60%, 84%);
+}
+.ruler li:before {
+   
+    position: absolute;
+    border-left: 1px solid #ccc;
+    height: .64em;
+    top: -.64em;
+    right: 1em;
 }
