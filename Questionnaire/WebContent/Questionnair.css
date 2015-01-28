@@ -15,11 +15,20 @@
 	color:white;
 	margin-right: 2%;
 }
+.question{
+padding-top: 3%;
+padding-bottom: 3%;
+}
 #questions{
 	margin : 0 auto;
 }
 #question1{
 	text-align: center;
+}
+.question7DisabledEvalheader{
+border-top: thin; border-top-style: dotted; border-top-color: red; 
+border-left: thin; border-left-style: dotted; border-left-color: red;
+border-right: thin; border-right-style: dotted; border-right-color: red;
 }
 #question1 td{
 	border-bottom:thin;
@@ -29,6 +38,15 @@
 #question1 tr td:first-child{
 	text-align: left;
 }
+
+table{
+	width: 98%;
+}
+#question7Evaluation{
+	border-color:red;
+	border-style: double;
+}
+
 
 .ruler, .ruler li {
     margin: 0;

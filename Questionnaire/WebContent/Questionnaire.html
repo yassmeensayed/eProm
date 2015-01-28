@@ -17,7 +17,7 @@
 		</h4>
 		<div id="questions">
 			<ul style="list-style: none;">
-				<li><div class="questionHeader">
+				<li class="question"><div class="questionHeader">
 						1. We are interested in learning how your illness affects your
 						ability to function in daily life. Please tick () the ONE best
 						answer that describes your usual abilities<span class="notice">
@@ -207,7 +207,7 @@
 							<td><input type="radio" name="1.b10" value="NOTAPPLICABLE" /></td>
 						</tr>
 					</table></li>
-				<li><table border="1px">
+				<li class="question"><table border="1px">
 						<tr>
 							<td colspan="2">
 
@@ -242,7 +242,7 @@
 						</tr>
 
 					</table></li>
-				<li>
+				<li class="question">
 					<table border="1px">
 						<tr>
 							<td colspan="2">
@@ -280,7 +280,7 @@
 
 					</table>
 				</li>
-				<li>
+				<li class="question">
 					<table border="1px">
 						<tr>
 							<td colspan="2">
@@ -318,8 +318,9 @@
 					</table>
 
 				</li>
-				<li><div class="questionHeader">5. OVER THE LAST WEEK
-						when you awakened in the morning, did you feel stiff?</div>
+				<li class="question"><div class="questionHeader">5. OVER
+						THE LAST WEEK when you awakened in the morning, did you feel
+						stiff?</div>
 					<table>
 						<tr>
 							<td>YES:</td>
@@ -335,9 +336,155 @@
 							<td><input type="radio" name="STIFF_LIMBS" /></td>
 						</tr>
 					</table></li>
-				<li></li>
-				<li></li>
-				<li>
+				<li class="question"></li>
+				<li class="question"><div class="questionHeader">
+						7. Please tick (&#10003;) if you have experienced any of the
+						following <span class="notice">OVER THE LAST MONTH:</span>
+					</div>
+					<table id="question7">
+						<tr>
+							<td>Fever <input type="checkbox" value="Fever" id="Fever" /></td>
+							<td>Dry Eye<input type="checkbox" value="Dry Eye"
+								id="Dry_Eye" /></td>
+							<td>Gynecological Problem<input type="checkbox" value=""
+								id="Gynecological_Problem"></td>
+							<td>Cardiovascular Risk Assessment</td>
+						</tr>
+						<tr>
+							<td>Weight gain (&gt; 10 lbs)<input type="checkbox" value=""
+								id=""></td>
+							<td>Dry Mouth <input type="checkbox" value="" id=""></td>
+							<td>Short plans for having a baby <input type="checkbox"
+								value="" id=""></td>
+							<td>Age &gt; 50 years old<input type="checkbox" value=""
+								id=""></td>
+						</tr>
+						<tr>
+							<td>Weight Loss (&gt; 10 lbs)<input type="checkbox" value=""
+								id=""></td>
+							<td>Other eye problems <input type="checkbox" value="" id=""></td>
+							<td>Sexual Relationship Problems <input type="checkbox"
+								value="" id=""></td>
+							<td>High Blood pressure<input type="checkbox" value="" id=""></td>
+						</tr>
+						<tr>
+							<td>Loss of appetite<input type="checkbox" value="" id=""></td>
+							<td>Headache <input type="checkbox" value="" id=""></td>
+							<td>Problems with erection (for men) <input type="checkbox"
+								value="" id=""></td>
+							<td>High Cholesterol<input type="checkbox" value="" id=""></td>
+						</tr>
+						<tr>
+							<td>Trouble swallowing<input type="checkbox" value="" id=""></td>
+							<td>Shortness of breath<input type="checkbox" value="" id=""></td>
+							<td>Kidney problems <input type="checkbox" value="" id=""></td>
+							<td>Current Smoker<input type="checkbox" value="" id=""></td>
+						</tr>
+						<tr>
+							<td>Soreness in the mouth<input type="checkbox" value=""
+								id=""></td>
+							<td>Wheezing / asthma<input type="checkbox" value="" id=""></td>
+							<td>Absent from work due to joint pain <input
+								type="checkbox" value="" id=""></td>
+							<td>Ischemic Heart Disease<input type="checkbox" value=""
+								id=""></td>
+						</tr>
+						<tr>
+							<td>Bleeding/inflammation of the gum <input type="checkbox"
+								value="" id=""></td>
+							<td>Cough <input type="checkbox" value="" id=""></td>
+							<td>&gt; 3 Alcoholic drinks per day <input type="checkbox"
+								value="" id=""></td>
+							<td>Stroke<input type="checkbox" value="" id=""></td>
+						</tr>
+						<tr>
+							<td>Psoriasis <input type="checkbox" value="" id=""></td>
+							<td>Heartburn<input type="checkbox" value="" id=""></td>
+							<td>Lost Height<input type="checkbox" value="" id=""></td>
+							<td>Irregular Heart beats<input type="checkbox" value=""
+								id=""></td>
+						</tr>
+						<tr>
+							<td>Unusual bruising or bleeding <input type="checkbox"
+								value="" id=""></td>
+							<td>Feeling Sickly / Nausea<input type="checkbox" value=""
+								id=""></td>
+							<td>Had a recent fracture<input type="checkbox" value=""
+								id=""></td>
+							<td>Diabetes Mellitus<input type="checkbox" value="" id=""></td>
+						</tr>
+						<tr >
+							<td>Numbness or tingling <input type="checkbox" value=""
+								id=""></td>
+							<td>Constipation<input type="checkbox" value="" id=""></td>
+							<td>Falls Risk Assessment</td>
+							<td rowspan=6><table id="question7Evaluation">
+									<tr>
+										<td colspan="2" rowspan="2">Professional Entry</td>
+									</tr>
+									<tr></tr>
+									<tr>
+										<td>ESR:</td>
+										<td>CRP:</td>
+									</tr>
+									<tr>
+										<td>SJC:</td>
+										<td>RF:</td>
+									</tr>
+									<tr>
+										<td>DAS:</td>
+										<td>BMI:</td>
+									</tr>
+									<tr>
+										<td>B/P:</td>
+										<td>Chol:</td>
+									</tr>
+								</table></td>
+
+						</tr>
+						<tr>
+							<td>Loss of hair <input type="checkbox" value="" id=""></td>
+							<td>Diarrhea<input type="checkbox" value="" id=""></td>
+							<td>Loss of your balance <input type="checkbox" value=""
+								id="">Loss of your balance
+							</td>
+
+						</tr>
+						<tr>
+							<td>Swollen Glands <input type="checkbox" value="" id=""></td>
+							<td>Dark or bloody stools <input type="checkbox" value=""
+								id=""></td>
+							<td>Problems with your sight<input type="checkbox" value=""
+								id=""></td>
+							
+						</tr>
+						<tr>
+							<td>Problems with hearing <input type="checkbox" value=""
+								id=""></td>
+							<td>Problems with urination <input type="checkbox" value=""
+								id=""></td>
+							<td>Weakness of your grip strength<input type="checkbox"
+								value="" id=""></td>
+							
+						</tr>
+						<tr>
+							<td>Thyroid Disease <input type="checkbox" value="" id=""></td>
+							<td>Pulmonary Embolism / DVT <input type="checkbox" value=""
+								id=""></td>
+							<td>&gt;1 Fall in the last year <input type="checkbox"
+								value="" id=""></td>
+							
+						<tr>
+							<td>Muscle pain, ache or weakness <input type="checkbox"
+								value="" id=""></td>
+							<td>Diagnosed to have cancer<input type="checkbox" value=""
+								id=""></td>
+							<td>Change in Gait / Slow walking speed<input
+								type="checkbox" value="" id=""></td>
+							
+						</tr>
+					</table></li>
+				<li class="question">
 					<table border="1px">
 						<tr>
 							<td colspan="3">
@@ -408,7 +555,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">4. IÕve concerns regarding side effects of
+							<td colspan="2">4. Iï¿½ve concerns regarding side effects of
 								medications used to treat my condition.</td>
 							<td colspan="2">
 								<ul class="ruler">
@@ -481,7 +628,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">8. Sometimes I feel my condition is beyond
-								both my and my doctorÕs control.</td>
+								both my and my doctorï¿½s control.</td>
 							<td colspan="2">
 								<ul class="ruler">
 									<li><input type="radio" name="Q8_8" value="R_10">10</li>
