@@ -1,68 +1,125 @@
 #MainContainer {
-	
 	margin: 0 auto;
 	text-align: center;
 	border-style: double;
 	width: 80%;
 }
-.notice{
+
+.notice {
 	text-decoration: underline;
 	font-weight: bold;
-	font-style: italic; 
+	font-style: italic;
 }
-.questionHeader{
+
+.questionHeader {
 	background-color: #990000;
-	color:white;
+	color: white;
 	margin-right: 2%;
 }
-#questions{
-	margin : 0 auto;
+
+.question {
+	padding-top: 3%;
+	padding-bottom: 3%;
 }
-#question1{
+
+#questions {
+	margin: 0 auto;
+}
+
+#question1 {
 	text-align: center;
 }
-#question1 td{
-	border-bottom:thin;
-	border-bottom-style:solid;
+
+.question7DisabledEvalheader {
+	border-top: thin;
+	border-top-style: dotted;
+	border-top-color: red;
+	border-left: thin;
+	border-left-style: dotted;
+	border-left-color: red;
+	border-right: thin;
+	border-right-style: dotted;
+	border-right-color: red;
+}
+
+#question1  td:nth-child(-n+5){
+	border-bottom: thin;
+	border-bottom-style: solid;
 	border-bottom-color: red;
 }
-#question1 tr td:first-child{
+#question1 tr:nth-child(n+11)  td:nth-child(-n+6){
+	border-bottom: thin;
+	border-bottom-style: solid;
+	border-bottom-color: red;
+}
+
+#question1 tr td:first-child {
 	text-align: left;
 }
 
-.ruler, .ruler li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: inline-block; 
+ 
+table {
+	width: 98%;
+}
+
+#question7Evaluation {
+	border-color: #990000;
+	border-style: double;
+}
+
+#Dis_result , #QoL_result{
+
+	border-color: #990000;
+	border-style: solid;
+	
+}
+
+
+
+.ruler,.ruler li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: inline-block;
+ 
 }
 /* IE6-7 Fix */
-.ruler, .ruler li {
-    *display: inline;
+.ruler,.ruler li {
+	*display: inline;
 }
+
 .ruler {
-    background: -webkit-linear-gradient(left, rgb(247, 222, 222) , rgb(253, 2, 12));; /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, rgb(247, 222, 222) , rgb(253, 2, 12));; /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gsradient(right, rgb(247, 222, 222) , rgb(253, 2, 12)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, rgb(247, 222, 222) , rgb(253, 2, 12));
-    box-shadow: 0 -1px 1em hsl(60, 60%, 84%) inset;
-    border-radius: 2px;
-    border: 1px solid #000;
-    color: #000;
-    margin: 0;
-    height: 1.7em;
-    padding-right: 1cm;
-    white-space: nowrap; 
+ 
+	background: -webkit-linear-gradient(left, rgb(247, 222, 222),
+		rgb(253, 2, 12));; /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, rgb(247, 222, 222),
+		rgb(253, 2, 12));; /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gsradient(right, rgb(247, 222, 222),
+		rgb(253, 2, 12)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, rgb(247, 222, 222),
+		rgb(253, 2, 12));
+	box-shadow: 0 -1px 1em hsl(60, 60%, 84%) inset;
+	border-radius: 2px;
+	border: 1px solid #000;
+	color: #000;
+	margin: 0;
+	height: 1.7em;
+	padding-right: 1cm;
+	white-space: nowrap;
+ 
 }
+
 .ruler li {
-    padding-left: 1cm;
-    width: 1em ;
-/*     margin: .64em -1em -.64em; */
-    text-align: center;
-    position: relative;
-    text-shadow: 1px 1px hsl(60, 60%, 84%);
+	padding-left: 1cm;
+	width: 1em;
+	/*     margin: .64em -1em -.64em; */
+	text-align: center;
+	position: relative;
+	text-shadow: 1px 1px hsl(60, 60%, 84%);
 }
+
 .ruler li:before {
+ 
    
     position: absolute;
     border-left: 1px solid #ccc;
@@ -80,3 +137,4 @@
 }
 /***********************************/
 
+ 
