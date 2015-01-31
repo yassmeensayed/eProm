@@ -34,7 +34,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    display: inline-block;
+    display: inline-block; 
 }
 /* IE6-7 Fix */
 .ruler, .ruler li {
@@ -52,7 +52,7 @@
     margin: 0;
     height: 1.7em;
     padding-right: 1cm;
-    white-space: nowrap;
+    white-space: nowrap; 
 }
 .ruler li {
     padding-left: 1cm;
@@ -70,3 +70,13 @@
     top: -.64em;
     right: 1em;
 }
+
+#skeletonIMG{
+	display: inline-block;
+	width: auto !important; /*override the width below*/
+  width: 60%;
+  max-width: 60%; 
+  clear: both;
+}
+/***********************************/
+
