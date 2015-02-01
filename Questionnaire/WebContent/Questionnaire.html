@@ -6,6 +6,7 @@
 <script src="jquery-2.1.3.min.js"></script>
 <script type="text/javascript">
 	var qualityOfLifeCounter = 10;
+	var qol_values = {};
 	function isFunctionalDisorderQuestionComplete() {
 		if ($('[name="1_a1"]').is(':checked')
 				&& $('[name="1_a2"]').is(':checked')
@@ -36,17 +37,75 @@
 		}
 		return false;
 	}
+	function isQol(current) {
+		if (($(current).attr('name')) == "1_b1"
+				|| $(current).attr('name') == "1_b2"
+				|| $(current).attr('name') == "1_b3"
+				|| $(current).attr('name') == "1_b4"
+				|| $(current).attr('name') == "1_b5"
+				|| $(current).attr('name') == "1_b6"
+				|| $(current).attr('name') == "1_b7"
+				|| $(current).attr('name') == "1_b8"
+				|| $(current).attr('name') == "1_b9"
+				|| $(current).attr('name') == "1_b10") {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	function getValue(current) {
+
 		if ($(current).val() == "ANY") {
+			if (isQol(current)) {
+				if ($(current).attr('name') in qol_values) {
+					if (qol_values[$(current).attr('name')] == "NOTAPPLICABLE") {
+						qualityOfLifeCounter++;
+					}
+				}
+				qol_values[$(current).attr('name')] = "ANY";
+			}
 			return 0;
 		} else if ($(current).val() == "SOME") {
+			if (isQol(current)) {
+				if ($(current).attr('name') in qol_values) {
+					if (qol_values[$(current).attr('name')] == "NOTAPPLICABLE") {
+						qualityOfLifeCounter++;
+					}
+				}
+			qol_values[$(current).attr('name')] = "SOME";
+			}
 			return 1;
 		} else if ($(current).val() == "MUCH") {
+			if (isQol(current)) {
+				if ($(current).attr('name') in qol_values) {
+					if (qol_values[$(current).attr('name')] == "NOTAPPLICABLE") {
+						qualityOfLifeCounter++;
+					}
+				}
+			qol_values[$(current).attr('name')] = "MUCH";
+			}
 			return 2;
 		} else if ($(current).val() == "UNABLE") {
+			if (isQol(current)) {
+				if ($(current).attr('name') in qol_values) {
+					if (qol_values[$(current).attr('name')] == "NOTAPPLICABLE") {
+						qualityOfLifeCounter++;
+					}
+				}
+			qol_values[$(current).attr('name')] = "MUCH";
+			}
 			return 3;
 		} else if ($(current).val() == "NOTAPPLICABLE") {
-			qualityOfLifeCounter--;//TODO solve bug if same question changed should return the counter back 
+			if(isQol(current)){
+				if ($(current).attr('name') in qol_values) {
+					if (qol_values[$(current).attr('name')] != "NOTAPPLICABLE") {
+						qualityOfLifeCounter--;
+					}
+				}else{
+					qualityOfLifeCounter--;
+				}
+				qol_values[$(current).attr('name')] = "NOTAPPLICABLE";
+			}
 			return 0;
 		}
 	}
@@ -62,7 +121,11 @@
 					+ getValue($('[name="1_b8"]:checked'))
 					+ getValue($('[name="1_b9"]:checked'))
 					+ getValue($('[name="1_b10"]:checked'));
-			$("#QoL").val(qol_result / qualityOfLifeCounter);
+			if (qualityOfLifeCounter >= 8) {
+				$("#QoL").val(qol_result / qualityOfLifeCounter);
+			} else {
+				$("#QoL").val("");
+			}
 		} else {
 			$("#QoL").val("");
 		}
@@ -146,7 +209,7 @@
 		$('[name="1_b10"]').click(function() {
 			updateQualtyOFLife();
 		});
-		
+
 	});
 </script>
 
@@ -351,9 +414,9 @@
 							<td><input type="radio" name="1_b10" value="NOTAPPLICABLE" /></td>
 						</tr>
 					</table></li>
- 
+
 				<li class="question"><table border="1px">
- 
+
 						<tr>
 							<td colspan="2">
 
@@ -482,562 +545,636 @@
 							<td><input type="radio" name="STIFF_LIMBS" /></td>
 						</tr>
 					</table></li>
- 
+
 				<li>
-				<div class="questionHeader">6. Please mark in the appropriate box 
-				to indicate in which of your joints you feel painful TODAY.
-				<br> <span class="notice">Alternatively you can put a figure 1, 2 or 3 to describe the severity 
-				of the pain you feel in any joint as follows:
-					<br>1 = mild pain,
-					2 = moderate pain, 3 = severe pain.</span><br>
-				</div>
-				<img id="skeletonIMG" src="skeleton.jpg" >
-				<div>
-				
-<table border="1px" cellspacing="0" cellpadding="0">
- <col width=65 span=8 style='width:65pt'>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 width=65 style='height:15.0pt;width:65pt'>Neck</td>
-  <td class=xl65 align=right width=65 style='border-left:none;width:65pt'>
-  1 <input type="checkbox" name="Q6_1" >
-  <select name="Q6_S1">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select>
-  </td>
-  <td class=xl65 width=65 style='border-left:none;width:65pt'>Right Hip</td>
-  <td class=xl65 align=right width=65 style='border-left:none;width:65pt'>23 <input type="checkbox" name="Q6_23" >
-  <select name="Q6_S23">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td rowspan=12 class=xl69 width=65 style='border-bottom:.5pt solid black;
-  width:65pt'>Left Toes</td>
-  <td class=xl65 align=right width=65 style='border-left:none;width:65pt'>39<input type="checkbox" name="Q6_39" >
-  <select name="Q6_S39">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td rowspan=14 class=xl66 width=65 style='border-bottom:.5pt solid black;
-  width:65pt'>Left Knuckles / Fingers</td>
-  <td class=xl65 align=right width=65 style='border-left:none;width:65pt'>55<input type="checkbox" name="Q6_55" >
-  <select name="Q6_S55">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td rowspan=3 height=45 class=xl66 style='border-bottom:.5pt solid black;
-  height:45.0pt;border-top:none'>Right Shoulder</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>2<input type="checkbox" name="Q6_2" >
-  <select name="Q6_S2">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 style='border-top:none;border-left:none'>Right Knee</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>24<input type="checkbox" name="Q6_24" >
-  <select name="Q6_S24">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>40<input type="checkbox" name="Q6_40" >
-  <select name="Q6_S40">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>56<input type="checkbox" name="Q6_56" >
-  <select name="Q6_S56">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>3<input type="checkbox" name="Q6_3" >
-  <select name="Q6_S3">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 style='border-top:none;border-left:none'>Right Ankle</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>25<input type="checkbox" name="Q6_25" >
-  <select name="Q6_S25">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>41<input type="checkbox" name="Q6_41" >
-  <select name="Q6_S41">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>57<input type="checkbox" name="Q6_57" >
-  <select name="Q6_S57">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>4<input type="checkbox" name="Q6_4" >
-  <select name="Q6_S4">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td rowspan=13 class=xl66 style='border-bottom:.5pt solid black;border-top:
-  none'>Right Toes</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>26<input type="checkbox" name="Q6_26" >
-  <select name="Q6_S26">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>42<input type="checkbox" name="Q6_42" >
-  <select name="Q6_S42">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>58<input type="checkbox" name="Q6_58" >
-  <select name="Q6_S58">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 style='height:15.0pt; '>Shoulder Blade</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>5<input type="checkbox" name="Q6_5" >
-  <select name="Q6_S5">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>27<input type="checkbox" name="Q6_27" >
-  <select name="Q6_S27">
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>43<input type="checkbox" name="Q6_43" >
-  <select name="Q6_S43" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>59<input type="checkbox" name="Q6_59" >
-  <select name="Q6_S59" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 style='height:15.0pt;border-top:none'>Right Elbow</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>6<input type="checkbox" name="Q6_6" >
-  <select name="Q6_S6" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>28<input type="checkbox" name="Q6_28" >
-  <select name="Q6_S28" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>44<input type="checkbox" name="Q6_44" >
-  <select name="Q6_S44" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>60<input type="checkbox" name="Q6_60" >
-  <select name="Q6_S60" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 style='height:15.0pt;border-top:none'>Low Back</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>7<input type="checkbox" name="Q6_7" >
-  <select name="Q6_S7" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>29<input type="checkbox" name="Q6_29" >
-  <select name="Q6_S29" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>46<input type="checkbox" name="Q6_46" >
-  <select name="Q6_S46" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>61<input type="checkbox" name="Q6_61" >
-  <select name="Q6_S61" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 style='height:15.0pt;border-top:none'>Right Wrist</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>8<input type="checkbox" name="Q6_8" >
-  <select name="Q6_S8" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>30<input type="checkbox" name="Q6_30" >
-  <select name="Q6_S30" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>47<input type="checkbox" name="Q6_47" >
-  <select name="Q6_S47" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>62<input type="checkbox" name="Q6_62" >
-  <select name="Q6_S62" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td rowspan=14 height=210 class=xl69 style='border-bottom:.5pt solid black;
-  height:210.0pt;border-top:none'>Right Knuckles / Fingers<span
-  style="mso-spacerun:yes">&nbsp;</span></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>9<input type="checkbox" name="Q6_9" >
-  <select name="Q6_S9" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>31<input type="checkbox" name="Q6_31" >
-  <select name="Q6_S31" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>48<input type="checkbox" name="Q6_48" >
-  <select name="Q6_S48" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>63<input type="checkbox" name="Q6_63" >
-  <select name="Q6_S63" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>10<input type="checkbox" name="Q6_10" >
-  <select name="Q6_S10" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>32<input type="checkbox" name="Q6_32" >
-  <select name="Q6_S32" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>49<input type="checkbox" name="Q6_49" >
-  <select name="Q6_S49" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>64<input type="checkbox" name="Q6_64" >
-  <select name="Q6_S64" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>11<input type="checkbox" name="Q6_11" >
-  <select name="Q6_S11" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>33<input type="checkbox" name="Q6_33" >
-  <select name="Q6_S33" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>50<input type="checkbox" name="Q6_50" >
-  <select name="Q6_S50" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>65<input type="checkbox" name="Q6_65" >
-  <select name="Q6_S65" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>12<input type="checkbox" name="Q6_12" >
-  <select name="Q6_S12" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>34<input type="checkbox" name="Q6_34" >
-  <select name="Q6_S34" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>51<input type="checkbox" name="Q6_51" >
-  <select name="Q6_S51" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>66<input type="checkbox" name="Q6_66" >
-  <select name="Q6_S66" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>13<input type="checkbox" name="Q6_13" >
-  <select name="Q6_S13" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>35<input type="checkbox" name="Q6_35" >
-  <select name="Q6_S35" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 style=' border-left:none'>Left Ankle</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>52<input type="checkbox" name="Q6_52" >
-  <select name="Q6_S52" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>67<input type="checkbox" name="Q6_67" >
-  <select name="Q6_S67" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>14<input type="checkbox" name="Q6_14" >
-  <select name="Q6_S14" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>36<input type="checkbox" name="Q6_36" >
-  <select name="Q6_S36" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 style='border-top:none;border-left:none'>Left Knee</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>53<input type="checkbox" name="Q6_53" >
-  <select name="Q6_S53" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>68<input type="checkbox" name="Q6_68" >
-  <select name="Q6_S68" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>15<input type="checkbox" name="Q6_15" >
-  <select name="Q6_S15" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>37<input type="checkbox" name="Q6_37" >
-  <select name="Q6_S37" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 style='border-top:none;border-left:none'>Left Hip</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>54<input type="checkbox" name="Q6_54" >
-  <select name="Q6_S54" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 style='border-left:none'>Left Wrist</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>69<input type="checkbox" name="Q6_69" >
-  <select name="Q6_S69" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>16<input type="checkbox" name="Q6_16" >
-  <select name="Q6_S16" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>38<input type="checkbox" name="Q6_38" >
-  <select name="Q6_S38" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td colspan=2 rowspan=7 class=xl72 style='border-right:.5pt solid black;
-  border-bottom:.5pt solid black'>&nbsp;</td>
-  <td class=xl65 style='border-top:none;'>Left Elbow</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>70<input type="checkbox" name="Q6_70" >
-  <select name="Q6_S70" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>17<input type="checkbox" name="Q6_17" >
-  <select name="Q6_S17" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td colspan=2 rowspan=6 class=xl72 style='border-right:.5pt solid black;
-  border-bottom:.5pt solid black'>&nbsp;</td>
-  <td rowspan=3 class=xl66 style='border-bottom:.5pt solid black;border-top:
-  none'>Left Shoulder</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>71<input type="checkbox" name="Q6_71" >
-  <select name="Q6_S71" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>18<input type="checkbox" name="Q6_18" >
-  <select name="Q6_S18" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>72<input type="checkbox" name="Q6_72" >
-  <select name="Q6_S72" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>19<input type="checkbox" name="Q6_19" >
-  <select name="Q6_S19" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>73<input type="checkbox" name="Q6_73" >
-  <select name="Q6_S73" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>20<input type="checkbox" name="Q6_20" >
-  <select name="Q6_S20" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 >Right Top Foot</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>74<input type="checkbox" name="Q6_74" >
-  <select name="Q6_S74" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>21<input type="checkbox" name="Q6_21" >
-  <select name="Q6_S21" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td class=xl65 style='border-top:none;'>Left Top Foot</td>
-  <td class=xl65 align=right style='border-top:none;border-left:none'>75<input type="checkbox" name="Q6_75" >
-  <select name="Q6_S75" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
- </tr>
- <tr height=15 style='height:15.0pt'>
-  <td height=15 class=xl65 align=right style='height:15.0pt;border-top:none;
-  border-left:none'>22<input type="checkbox" name="Q6_22" >
-  <select name="Q6_S22" >
-  <option  >1</option>
-  <option  >2</option>
-  <option  >3</option> 
-</select></td>
-  <td colspan=2 class=xl78 style='border-right:.5pt solid black;'>&nbsp;</td>
- </tr>
-</table>
-				</div>
+					<div class="questionHeader">
+						6. Please mark in the appropriate box to indicate in which of your
+						joints you feel painful TODAY. <br> <span class="notice">Alternatively
+							you can put a figure 1, 2 or 3 to describe the severity of the
+							pain you feel in any joint as follows: <br>1 = mild pain, 2
+							= moderate pain, 3 = severe pain.
+						</span><br>
+					</div> <img id="skeletonIMG" src="skeleton.jpg">
+					<div>
+
+						<table border="1px" cellspacing="0" cellpadding="0">
+							<col width=65 span=8 style='width: 65pt'>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 width=65
+									style='height: 15.0pt; width: 65pt'>Neck</td>
+								<td class=xl65 align=right width=65
+									style='border-left: none; width: 65pt'>1 <input
+									type="checkbox" name="Q6_1"> <select name="Q6_S1">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select>
+								</td>
+								<td class=xl65 width=65 style='border-left: none; width: 65pt'>Right
+									Hip</td>
+								<td class=xl65 align=right width=65
+									style='border-left: none; width: 65pt'>23 <input
+									type="checkbox" name="Q6_23"> <select name="Q6_S23">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td rowspan=12 class=xl69 width=65
+									style='border-bottom: .5pt solid black; width: 65pt'>Left
+									Toes</td>
+								<td class=xl65 align=right width=65
+									style='border-left: none; width: 65pt'>39<input
+									type="checkbox" name="Q6_39"> <select name="Q6_S39">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td rowspan=14 class=xl66 width=65
+									style='border-bottom: .5pt solid black; width: 65pt'>Left
+									Knuckles / Fingers</td>
+								<td class=xl65 align=right width=65
+									style='border-left: none; width: 65pt'>55<input
+									type="checkbox" name="Q6_55"> <select name="Q6_S55">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td rowspan=3 height=45 class=xl66
+									style='border-bottom: .5pt solid black; height: 45.0pt; border-top: none'>Right
+									Shoulder</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>2<input
+									type="checkbox" name="Q6_2"> <select name="Q6_S2">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 style='border-top: none; border-left: none'>Right
+									Knee</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>24<input
+									type="checkbox" name="Q6_24"> <select name="Q6_S24">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>40<input
+									type="checkbox" name="Q6_40"> <select name="Q6_S40">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>56<input
+									type="checkbox" name="Q6_56"> <select name="Q6_S56">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>3<input
+									type="checkbox" name="Q6_3"> <select name="Q6_S3">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 style='border-top: none; border-left: none'>Right
+									Ankle</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>25<input
+									type="checkbox" name="Q6_25"> <select name="Q6_S25">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>41<input
+									type="checkbox" name="Q6_41"> <select name="Q6_S41">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>57<input
+									type="checkbox" name="Q6_57"> <select name="Q6_S57">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>4<input
+									type="checkbox" name="Q6_4"> <select name="Q6_S4">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td rowspan=13 class=xl66
+									style='border-bottom: .5pt solid black; border-top: none'>Right
+									Toes</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>26<input
+									type="checkbox" name="Q6_26"> <select name="Q6_S26">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>42<input
+									type="checkbox" name="Q6_42"> <select name="Q6_S42">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>58<input
+									type="checkbox" name="Q6_58"> <select name="Q6_S58">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 style='height: 15.0pt;'>Shoulder
+									Blade</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>5<input
+									type="checkbox" name="Q6_5"> <select name="Q6_S5">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>27<input
+									type="checkbox" name="Q6_27"> <select name="Q6_S27">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>43<input
+									type="checkbox" name="Q6_43"> <select name="Q6_S43">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>59<input
+									type="checkbox" name="Q6_59"> <select name="Q6_S59">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65
+									style='height: 15.0pt; border-top: none'>Right Elbow</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>6<input
+									type="checkbox" name="Q6_6"> <select name="Q6_S6">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>28<input
+									type="checkbox" name="Q6_28"> <select name="Q6_S28">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>44<input
+									type="checkbox" name="Q6_44"> <select name="Q6_S44">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>60<input
+									type="checkbox" name="Q6_60"> <select name="Q6_S60">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65
+									style='height: 15.0pt; border-top: none'>Low Back</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>7<input
+									type="checkbox" name="Q6_7"> <select name="Q6_S7">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>29<input
+									type="checkbox" name="Q6_29"> <select name="Q6_S29">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>46<input
+									type="checkbox" name="Q6_46"> <select name="Q6_S46">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>61<input
+									type="checkbox" name="Q6_61"> <select name="Q6_S61">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65
+									style='height: 15.0pt; border-top: none'>Right Wrist</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>8<input
+									type="checkbox" name="Q6_8"> <select name="Q6_S8">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>30<input
+									type="checkbox" name="Q6_30"> <select name="Q6_S30">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>47<input
+									type="checkbox" name="Q6_47"> <select name="Q6_S47">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>62<input
+									type="checkbox" name="Q6_62"> <select name="Q6_S62">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td rowspan=14 height=210 class=xl69
+									style='border-bottom: .5pt solid black; height: 210.0pt; border-top: none'>Right
+									Knuckles / Fingers<span style="mso-spacerun: yes">&nbsp;</span>
+								</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>9<input
+									type="checkbox" name="Q6_9"> <select name="Q6_S9">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>31<input
+									type="checkbox" name="Q6_31"> <select name="Q6_S31">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>48<input
+									type="checkbox" name="Q6_48"> <select name="Q6_S48">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>63<input
+									type="checkbox" name="Q6_63"> <select name="Q6_S63">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>10<input
+									type="checkbox" name="Q6_10"> <select name="Q6_S10">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>32<input
+									type="checkbox" name="Q6_32"> <select name="Q6_S32">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>49<input
+									type="checkbox" name="Q6_49"> <select name="Q6_S49">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>64<input
+									type="checkbox" name="Q6_64"> <select name="Q6_S64">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>11<input
+									type="checkbox" name="Q6_11"> <select name="Q6_S11">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>33<input
+									type="checkbox" name="Q6_33"> <select name="Q6_S33">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>50<input
+									type="checkbox" name="Q6_50"> <select name="Q6_S50">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>65<input
+									type="checkbox" name="Q6_65"> <select name="Q6_S65">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>12<input
+									type="checkbox" name="Q6_12"> <select name="Q6_S12">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>34<input
+									type="checkbox" name="Q6_34"> <select name="Q6_S34">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>51<input
+									type="checkbox" name="Q6_51"> <select name="Q6_S51">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>66<input
+									type="checkbox" name="Q6_66"> <select name="Q6_S66">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>13<input
+									type="checkbox" name="Q6_13"> <select name="Q6_S13">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>35<input
+									type="checkbox" name="Q6_35"> <select name="Q6_S35">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 style='border-left: none'>Left Ankle</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>52<input
+									type="checkbox" name="Q6_52"> <select name="Q6_S52">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>67<input
+									type="checkbox" name="Q6_67"> <select name="Q6_S67">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>14<input
+									type="checkbox" name="Q6_14"> <select name="Q6_S14">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>36<input
+									type="checkbox" name="Q6_36"> <select name="Q6_S36">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 style='border-top: none; border-left: none'>Left
+									Knee</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>53<input
+									type="checkbox" name="Q6_53"> <select name="Q6_S53">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>68<input
+									type="checkbox" name="Q6_68"> <select name="Q6_S68">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>15<input
+									type="checkbox" name="Q6_15"> <select name="Q6_S15">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>37<input
+									type="checkbox" name="Q6_37"> <select name="Q6_S37">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 style='border-top: none; border-left: none'>Left
+									Hip</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>54<input
+									type="checkbox" name="Q6_54"> <select name="Q6_S54">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 style='border-left: none'>Left Wrist</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>69<input
+									type="checkbox" name="Q6_69"> <select name="Q6_S69">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>16<input
+									type="checkbox" name="Q6_16"> <select name="Q6_S16">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>38<input
+									type="checkbox" name="Q6_38"> <select name="Q6_S38">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td colspan=2 rowspan=7 class=xl72
+									style='border-right: .5pt solid black; border-bottom: .5pt solid black'>&nbsp;</td>
+								<td class=xl65 style='border-top: none;'>Left Elbow</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>70<input
+									type="checkbox" name="Q6_70"> <select name="Q6_S70">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>17<input
+									type="checkbox" name="Q6_17"> <select name="Q6_S17">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td colspan=2 rowspan=6 class=xl72
+									style='border-right: .5pt solid black; border-bottom: .5pt solid black'>&nbsp;</td>
+								<td rowspan=3 class=xl66
+									style='border-bottom: .5pt solid black; border-top: none'>Left
+									Shoulder</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>71<input
+									type="checkbox" name="Q6_71"> <select name="Q6_S71">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>18<input
+									type="checkbox" name="Q6_18"> <select name="Q6_S18">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>72<input
+									type="checkbox" name="Q6_72"> <select name="Q6_S72">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>19<input
+									type="checkbox" name="Q6_19"> <select name="Q6_S19">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>73<input
+									type="checkbox" name="Q6_73"> <select name="Q6_S73">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>20<input
+									type="checkbox" name="Q6_20"> <select name="Q6_S20">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65>Right Top Foot</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>74<input
+									type="checkbox" name="Q6_74"> <select name="Q6_S74">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>21<input
+									type="checkbox" name="Q6_21"> <select name="Q6_S21">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td class=xl65 style='border-top: none;'>Left Top Foot</td>
+								<td class=xl65 align=right
+									style='border-top: none; border-left: none'>75<input
+									type="checkbox" name="Q6_75"> <select name="Q6_S75">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+							</tr>
+							<tr height=15 style='height: 15.0pt'>
+								<td height=15 class=xl65 align=right
+									style='height: 15.0pt; border-top: none; border-left: none'>22<input
+									type="checkbox" name="Q6_22"> <select name="Q6_S22">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select></td>
+								<td colspan=2 class=xl78 style='border-right: .5pt solid black;'>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
 				</li>
-				 
+
 				<li class="question"><div class="questionHeader">
 						7. Please tick (&#10003;) if you have experienced any of the
 						following <span class="notice">OVER THE LAST MONTH:</span>
@@ -1185,7 +1322,7 @@
 						</tr>
 					</table></li>
 				<li class="question">
- 
+
 					<table border="1px">
 						<tr>
 							<td colspan="3">
