@@ -37,6 +37,28 @@
 		}
 		return false;
 	}
+	function isQ2Complete(){
+		if($('[name="Q2"]').is(':checked')){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function isQ3Complete(){
+		if($('[name="Q3"]').is(':checked')){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function isQ4Complete(){
+		if($('[name="Q4"]').is(':checked')){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	function isQol(current) {
 		if (($(current).attr('name')) == "1_b1"
 				|| $(current).attr('name') == "1_b2"
@@ -148,7 +170,31 @@
 			$("#Fn_Dis").val("");
 		}
 	}
+	function updateQ2Result(){
+		if(isQ2Complete()){
+			$("#Q2_result").val($('[name="Q2"]:checked').val());
+		}
+	}
+	function updateQ3Result(){
+		if(isQ3Complete()){
+			$("#Q3_result").val($('[name="Q3"]:checked').val());
+		}
+	}
+	function updateQ4Result(){
+		if(isQ4Complete()){
+			$("#Q4_result").val($('[name="Q4"]:checked').val());
+		}
+	}
 	$(document).ready(function() {
+		$('[name="Q2"]').click(function(){
+			updateQ2Result();
+		});
+		$('[name="Q3"]').click(function(){
+			updateQ3Result();
+		});
+		$('[name="Q4"]').click(function(){
+			updateQ4Result();
+		});
 		$('[name="1_a1"]').click(function() {
 			updateFunctionalDisorder();
 		});
@@ -428,23 +474,23 @@
 								</div>
 							</td>
 							<td style="border: 3px solid maroon;">Pain <br> <input
-								type="text" size="6" disabled name="Q2_result">
+								type="text" size="6" disabled id="Q2_result">
 							</td>
 						</tr>
 						<tr>
 							<td>NO PAIN</td>
 							<td>
 								<ul class="ruler">
-									<li><input type="radio" name="Q2" value="R_10">10</li>
-									<li><input type="radio" name="Q2" value="R_20">20</li>
-									<li><input type="radio" name="Q2" value="R_30">30</li>
-									<li><input type="radio" name="Q2" value="R_40">40</li>
-									<li><input type="radio" name="Q2" value="R_50">50</li>
-									<li><input type="radio" name="Q2" value="R_60">60</li>
-									<li><input type="radio" name="Q2" value="R_70">70</li>
-									<li><input type="radio" name="Q2" value="R_80">80</li>
-									<li><input type="radio" name="Q2" value="R_90">90</li>
-									<li><input type="radio" name="Q2" value="R_100">100</li>
+									<li><input type="radio" name="Q2" value="10">10</li>
+									<li><input type="radio" name="Q2" value="20">20</li>
+									<li><input type="radio" name="Q2" value="30">30</li>
+									<li><input type="radio" name="Q2" value="40">40</li>
+									<li><input type="radio" name="Q2" value="50">50</li>
+									<li><input type="radio" name="Q2" value="60">60</li>
+									<li><input type="radio" name="Q2" value="70">70</li>
+									<li><input type="radio" name="Q2" value="80">80</li>
+									<li><input type="radio" name="Q2" value="90">90</li>
+									<li><input type="radio" name="Q2" value="100">100</li>
 								</ul>
 							</td>
 							<td>PAIN As Bad As It Could Be</td>
@@ -465,23 +511,23 @@
 								</div>
 							</td>
 							<td style="border: 3px solid maroon;">PGA <br> <input
-								type="text" size="6" disabled name="Q3_result">
+								type="text" size="6" disabled id="Q3_result">
 							</td>
 						</tr>
 						<tr>
 							<td>VERY WELL</td>
 							<td>
 								<ul class="ruler">
-									<li><input type="radio" name="Q3" value="R_10">10</li>
-									<li><input type="radio" name="Q3" value="R_20">20</li>
-									<li><input type="radio" name="Q3" value="R_30">30</li>
-									<li><input type="radio" name="Q3" value="R_40">40</li>
-									<li><input type="radio" name="Q3" value="R_50">50</li>
-									<li><input type="radio" name="Q3" value="R_60">60</li>
-									<li><input type="radio" name="Q3" value="R_70">70</li>
-									<li><input type="radio" name="Q3" value="R_80">80</li>
-									<li><input type="radio" name="Q3" value="R_90">90</li>
-									<li><input type="radio" name="Q3" value="R_100">100</li>
+									<li><input type="radio" name="Q3" value="10">10</li>
+									<li><input type="radio" name="Q3" value="20">20</li>
+									<li><input type="radio" name="Q3" value="30">30</li>
+									<li><input type="radio" name="Q3" value="40">40</li>
+									<li><input type="radio" name="Q3" value="50">50</li>
+									<li><input type="radio" name="Q3" value="60">60</li>
+									<li><input type="radio" name="Q3" value="70">70</li>
+									<li><input type="radio" name="Q3" value="80">80</li>
+									<li><input type="radio" name="Q3" value="90">90</li>
+									<li><input type="radio" name="Q3" value="100">100</li>
 								</ul>
 							</td>
 							<td>VERY POORLY</td>
@@ -502,23 +548,23 @@
 								</div>
 							</td>
 							<td style="border: 3px solid maroon;">Fatigue <br> <input
-								type="text" size="6" disabled name="Q4_result">
+								type="text" size="6" disabled id="Q4_result">
 							</td>
 						</tr>
 						<tr>
 							<td>NO PROBLEM</td>
 							<td>
 								<ul class="ruler">
-									<li><input type="radio" name="Q4" value="R_10">10</li>
-									<li><input type="radio" name="Q4" value="R_20">20</li>
-									<li><input type="radio" name="Q4" value="R_30">30</li>
-									<li><input type="radio" name="Q4" value="R_40">40</li>
-									<li><input type="radio" name="Q4" value="R_50">50</li>
-									<li><input type="radio" name="Q4" value="R_60">60</li>
-									<li><input type="radio" name="Q4" value="R_70">70</li>
-									<li><input type="radio" name="Q4" value="R_80">80</li>
-									<li><input type="radio" name="Q4" value="R_90">90</li>
-									<li><input type="radio" name="Q4" value="R_100">100</li>
+									<li><input type="radio" name="Q4" value="10">10</li>
+									<li><input type="radio" name="Q4" value="20">20</li>
+									<li><input type="radio" name="Q4" value="30">30</li>
+									<li><input type="radio" name="Q4" value="40">40</li>
+									<li><input type="radio" name="Q4" value="50">50</li>
+									<li><input type="radio" name="Q4" value="60">60</li>
+									<li><input type="radio" name="Q4" value="70">70</li>
+									<li><input type="radio" name="Q4" value="80">80</li>
+									<li><input type="radio" name="Q4" value="90">90</li>
+									<li><input type="radio" name="Q4" value="100">100</li>
 								</ul>
 							</td>
 							<td>A MAJOR PROBLEM</td>

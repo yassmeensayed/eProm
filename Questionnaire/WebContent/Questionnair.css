@@ -102,16 +102,17 @@ table {
 	border-radius: 2px;
 	border: 1px solid #000;
 	color: #000;
-	margin: 0;
-	height: 1.7em;
-	padding-right: 1cm;
-	white-space: nowrap;
+margin: 0 auto;
+height: 1.7em;
+padding-right: 3em;
+white-space: nowrap;
+width: 89%;
  
 }
 
 .ruler li {
-	padding-left: 1cm;
-	width: 1em;
+padding-left: 2em;
+width: 1em;
 	/*     margin: .64em -1em -.64em; */
 	text-align: center;
 	position: relative;
