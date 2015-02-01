@@ -37,28 +37,44 @@
 		}
 		return false;
 	}
-	function isQ2Complete(){
-		if($('[name="Q2"]').is(':checked')){
+	function isQ2Complete() {
+		if ($('[name="Q2"]').is(':checked')) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	function isQ3Complete(){
-		if($('[name="Q3"]').is(':checked')){
+	function isQ3Complete() {
+		if ($('[name="Q3"]').is(':checked')) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	function isQ4Complete(){
-		if($('[name="Q4"]').is(':checked')){
+	function isQ4Complete() {
+		if ($('[name="Q4"]').is(':checked')) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
+	function isQ8Complete() {
+		if ($('[name="Q8_1"]').is(':checked')
+				&& $('[name="Q8_2"]').is(':checked')
+				&& $('[name="Q8_3"]').is(':checked')
+				&& $('[name="Q8_4"]').is(':checked')
+				&& $('[name="Q8_5"]').is(':checked')
+				&& $('[name="Q8_6"]').is(':checked')
+				&& $('[name="Q8_7"]').is(':checked')
+				&& $('[name="Q8_8"]').is(':checked')
+				&& $('[name="Q8_9"]').is(':checked')
+				&& $('[name="Q8_10"]').is(':checked')) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	function isQol(current) {
 		if (($(current).attr('name')) == "1_b1"
 				|| $(current).attr('name') == "1_b2"
@@ -94,7 +110,7 @@
 						qualityOfLifeCounter++;
 					}
 				}
-			qol_values[$(current).attr('name')] = "SOME";
+				qol_values[$(current).attr('name')] = "SOME";
 			}
 			return 1;
 		} else if ($(current).val() == "MUCH") {
@@ -104,7 +120,7 @@
 						qualityOfLifeCounter++;
 					}
 				}
-			qol_values[$(current).attr('name')] = "MUCH";
+				qol_values[$(current).attr('name')] = "MUCH";
 			}
 			return 2;
 		} else if ($(current).val() == "UNABLE") {
@@ -114,16 +130,16 @@
 						qualityOfLifeCounter++;
 					}
 				}
-			qol_values[$(current).attr('name')] = "MUCH";
+				qol_values[$(current).attr('name')] = "MUCH";
 			}
 			return 3;
 		} else if ($(current).val() == "NOTAPPLICABLE") {
-			if(isQol(current)){
+			if (isQol(current)) {
 				if ($(current).attr('name') in qol_values) {
 					if (qol_values[$(current).attr('name')] != "NOTAPPLICABLE") {
 						qualityOfLifeCounter--;
 					}
-				}else{
+				} else {
 					qualityOfLifeCounter--;
 				}
 				qol_values[$(current).attr('name')] = "NOTAPPLICABLE";
@@ -170,32 +186,47 @@
 			$("#Fn_Dis").val("");
 		}
 	}
-	function updateQ2Result(){
-		if(isQ2Complete()){
+	function updateQ2Result() {
+		if (isQ2Complete()) {
 			$("#Q2_result").val($('[name="Q2"]:checked').val());
 		}
 	}
-	function updateQ3Result(){
-		if(isQ3Complete()){
+	function updateQ3Result() {
+		if (isQ3Complete()) {
 			$("#Q3_result").val($('[name="Q3"]:checked').val());
 		}
 	}
-	function updateQ4Result(){
-		if(isQ4Complete()){
+	function updateQ4Result() {
+		if (isQ4Complete()) {
 			$("#Q4_result").val($('[name="Q4"]:checked').val());
 		}
 	}
-	function updateQ8Result(){
-		
+	function updateQ8Result() {
+		if (isQ8Complete()) {
+			totalSum = parseInt($('[name="Q8_1"]:checked').val())
+					+ parseInt($('[name="Q8_2"]:checked').val())
+					+ parseInt($('[name="Q8_3"]:checked').val())
+					+ parseInt($('[name="Q8_4"]:checked').val())
+					+ parseInt($('[name="Q8_5"]:checked').val())
+					+ parseInt($('[name="Q8_6"]:checked').val())
+					+ parseInt($('[name="Q8_7"]:checked').val())
+					+ parseInt($('[name="Q8_8"]:checked').val())
+					+ parseInt($('[name="Q8_9"]:checked').val())
+					+ parseInt($('[name="Q8_10"]:checked').val());
+
+			$("#Q8_result").val(totalSum / 100);
+		} else {
+			$("#Q8_result").val("");
+		}
 	}
 	$(document).ready(function() {
-		$('[name="Q2"]').click(function(){
+		$('[name="Q2"]').click(function() {
 			updateQ2Result();
 		});
-		$('[name="Q3"]').click(function(){
+		$('[name="Q3"]').click(function() {
 			updateQ3Result();
 		});
-		$('[name="Q4"]').click(function(){
+		$('[name="Q4"]').click(function() {
 			updateQ4Result();
 		});
 		$('[name="1_a1"]').click(function() {
@@ -257,6 +288,36 @@
 		});
 		$('[name="1_b10"]').click(function() {
 			updateQualtyOFLife();
+		});
+		$('[name="Q8_1"]').click(function() {
+			updateQ8Result();
+		});
+		$('[name="Q8_2"]').click(function() {
+			updateQ8Result();
+		});
+		$('[name="Q8_3"]').click(function() {
+			updateQ8Result();
+		});
+		$('[name="Q8_4"]').click(function() {
+			updateQ8Result();
+		});
+		$('[name="Q8_5"]').click(function() {
+			updateQ8Result();
+		});
+		$('[name="Q8_6"]').click(function() {
+			updateQ8Result();
+		});
+		$('[name="Q8_7"]').click(function() {
+			updateQ8Result();
+		});
+		$('[name="Q8_8"]').click(function() {
+			updateQ8Result();
+		});
+		$('[name="Q8_9"]').click(function() {
+			updateQ8Result();
+		});
+		$('[name="Q8_10"]').click(function() {
+			updateQ8Result();
 		});
 
 	});
@@ -1383,12 +1444,12 @@
 								</div>
 							</td>
 							<td style="border: 3px solid maroon;" width="40px">RAI <br>
-								<input type="text" size="6" disabled name="Q8_result">
+								<input type="text" size="6" disabled id="Q8_result">
 							</td>
 						</tr>
 						<tr>
 							<td colspan="4">1. My condition is controlling my life.</td>
-							</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
@@ -1408,7 +1469,7 @@
 						<tr>
 							<td colspan="4">2. I would feel helpless if I could not rely
 								on other people for help with my condition.</td>
-								</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
@@ -1428,7 +1489,7 @@
 						<tr>
 							<td colspan="4">3. I am concerned that medicines can not
 								help me.</td>
-								</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
@@ -1448,7 +1509,7 @@
 						<tr>
 							<td colspan="4">4. I�ve concerns regarding side effects of
 								medications used to treat my condition.</td>
-								</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
@@ -1468,7 +1529,7 @@
 						<tr>
 							<td colspan="4">5. I often do not take my medicines as
 								directed.</td>
-								</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
@@ -1488,7 +1549,7 @@
 						<tr>
 							<td colspan="4">6. No matter what I do, or how hard I try, I
 								just can not seem to get relief from my symptoms.</td>
-								</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
@@ -1508,7 +1569,7 @@
 						<tr>
 							<td colspan="4">7. I am not coping effectively with my
 								condition.</td>
-								</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
@@ -1528,7 +1589,7 @@
 						<tr>
 							<td colspan="4">8. Sometimes I feel my condition is beyond
 								both my and my doctor�s control.</td>
-								</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
@@ -1548,7 +1609,7 @@
 						<tr>
 							<td colspan="4">9. Sometimes my condition makes me feel like
 								giving up.</td>
-								</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
@@ -1568,7 +1629,7 @@
 						<tr>
 							<td colspan="4">10. Due to my condition, sometimes I feel I
 								am a burden to those close to me.</td>
-								</tr>
+						</tr>
 						<tr>
 							<td colspan="4">
 								<ul class="ruler">
