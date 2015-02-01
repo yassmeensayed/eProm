@@ -185,6 +185,9 @@
 			$("#Q4_result").val($('[name="Q4"]:checked').val());
 		}
 	}
+	function updateQ8Result(){
+		
+	}
 	$(document).ready(function() {
 		$('[name="Q2"]').click(function(){
 			updateQ2Result();
@@ -304,7 +307,7 @@
 							<td><input type="radio" name="1_a2" value="MUCH" /></td>
 							<td><input type="radio" name="1_a2" value="UNABLE" /></td>
 							<td rowspan="4" id="Dis_result">Fn. Dis. <br /> <br /> <br />
-								<input type="text" id="Fn_Dis" /></td>
+								<input type="text" disabled id="Fn_Dis" /></td>
 
 						</tr>
 						<tr>
@@ -337,7 +340,7 @@
 							<td><input type="radio" name="1_a6" value="MUCH" /></td>
 							<td><input type="radio" name="1_a6" value="UNABLE" /></td>
 							<td rowspan="4" id="QoL_result">QoL <br /> <br /> <br />
-								<input type="text" id="QoL" /></td>
+								<input type="text" disabled id="QoL" /></td>
 						</tr>
 						<tr>
 							<td>7. Walk outdoors on a flat ground?</td>
@@ -501,8 +504,6 @@
 					<table border="1px">
 						<tr>
 							<td colspan="2">
-
-
 								<div class="questionHeader">
 									3. Considering all the ways your arthritis/ joint or body ache
 									may be affecting you AT THIS TIME <br> <span
@@ -1232,7 +1233,7 @@
 								id="Dry_Eye" /></td>
 							<td>Gynecological Problem<input type="checkbox" value=""
 								id="Gynecological_Problem"></td>
-							<td>Cardiovascular Risk Assessment</td>
+							<td><b>Cardiovascular Risk Assessment</b>></td>
 						</tr>
 						<tr>
 							<td>Weight gain (&gt; 10 lbs)<input type="checkbox" value=""
@@ -1301,7 +1302,7 @@
 							<td>Numbness or tingling <input type="checkbox" value=""
 								id=""></td>
 							<td>Constipation<input type="checkbox" value="" id=""></td>
-							<td>Falls Risk Assessment</td>
+							<td bordercolor="red"><b>Falls Risk Assessment</b></td>
 							<td rowspan=6><table id="question7Evaluation">
 									<tr>
 										<td colspan="2" rowspan="2">Professional Entry</td>
@@ -1386,181 +1387,201 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">1. My condition is controlling my life.</td>
-							<td colspan="2">
+							<td colspan="4">1. My condition is controlling my life.</td>
+							</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_1" value="R_10">10</li>
-									<li><input type="radio" name="Q8_1" value="R_20">20</li>
-									<li><input type="radio" name="Q8_1" value="R_30">30</li>
-									<li><input type="radio" name="Q8_1" value="R_40">40</li>
-									<li><input type="radio" name="Q8_1" value="R_50">50</li>
-									<li><input type="radio" name="Q8_1" value="R_60">60</li>
-									<li><input type="radio" name="Q8_1" value="R_70">70</li>
-									<li><input type="radio" name="Q8_1" value="R_80">80</li>
-									<li><input type="radio" name="Q8_1" value="R_90">90</li>
-									<li><input type="radio" name="Q8_1" value="R_100">100</li>
+									<li><input type="radio" name="Q8_1" value="10">10</li>
+									<li><input type="radio" name="Q8_1" value="20">20</li>
+									<li><input type="radio" name="Q8_1" value="30">30</li>
+									<li><input type="radio" name="Q8_1" value="40">40</li>
+									<li><input type="radio" name="Q8_1" value="50">50</li>
+									<li><input type="radio" name="Q8_1" value="60">60</li>
+									<li><input type="radio" name="Q8_1" value="70">70</li>
+									<li><input type="radio" name="Q8_1" value="80">80</li>
+									<li><input type="radio" name="Q8_1" value="90">90</li>
+									<li><input type="radio" name="Q8_1" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">2. I would feel helpless if I could not rely
+							<td colspan="4">2. I would feel helpless if I could not rely
 								on other people for help with my condition.</td>
-							<td colspan="2">
+								</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_2" value="R_10">10</li>
-									<li><input type="radio" name="Q8_2" value="R_20">20</li>
-									<li><input type="radio" name="Q8_2" value="R_30">30</li>
-									<li><input type="radio" name="Q8_2" value="R_40">40</li>
-									<li><input type="radio" name="Q8_2" value="R_50">50</li>
-									<li><input type="radio" name="Q8_2" value="R_60">60</li>
-									<li><input type="radio" name="Q8_2" value="R_70">70</li>
-									<li><input type="radio" name="Q8_2" value="R_80">80</li>
-									<li><input type="radio" name="Q8_2" value="R_90">90</li>
-									<li><input type="radio" name="Q8_2" value="R_100">100</li>
+									<li><input type="radio" name="Q8_2" value="10">10</li>
+									<li><input type="radio" name="Q8_2" value="20">20</li>
+									<li><input type="radio" name="Q8_2" value="30">30</li>
+									<li><input type="radio" name="Q8_2" value="40">40</li>
+									<li><input type="radio" name="Q8_2" value="50">50</li>
+									<li><input type="radio" name="Q8_2" value="60">60</li>
+									<li><input type="radio" name="Q8_2" value="70">70</li>
+									<li><input type="radio" name="Q8_2" value="80">80</li>
+									<li><input type="radio" name="Q8_2" value="90">90</li>
+									<li><input type="radio" name="Q8_2" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">3. I am concerned that medicines can not
+							<td colspan="4">3. I am concerned that medicines can not
 								help me.</td>
-							<td colspan="2">
+								</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_3" value="R_10">10</li>
-									<li><input type="radio" name="Q8_3" value="R_20">20</li>
-									<li><input type="radio" name="Q8_3" value="R_30">30</li>
-									<li><input type="radio" name="Q8_3" value="R_40">40</li>
-									<li><input type="radio" name="Q8_3" value="R_50">50</li>
-									<li><input type="radio" name="Q8_3" value="R_60">60</li>
-									<li><input type="radio" name="Q8_3" value="R_70">70</li>
-									<li><input type="radio" name="Q8_3" value="R_80">80</li>
-									<li><input type="radio" name="Q8_3" value="R_90">90</li>
-									<li><input type="radio" name="Q8_3" value="R_100">100</li>
+									<li><input type="radio" name="Q8_3" value="10">10</li>
+									<li><input type="radio" name="Q8_3" value="20">20</li>
+									<li><input type="radio" name="Q8_3" value="30">30</li>
+									<li><input type="radio" name="Q8_3" value="40">40</li>
+									<li><input type="radio" name="Q8_3" value="50">50</li>
+									<li><input type="radio" name="Q8_3" value="60">60</li>
+									<li><input type="radio" name="Q8_3" value="70">70</li>
+									<li><input type="radio" name="Q8_3" value="80">80</li>
+									<li><input type="radio" name="Q8_3" value="90">90</li>
+									<li><input type="radio" name="Q8_3" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">4. I�ve concerns regarding side effects of
+							<td colspan="4">4. I�ve concerns regarding side effects of
 								medications used to treat my condition.</td>
-							<td colspan="2">
+								</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_4" value="R_10">10</li>
-									<li><input type="radio" name="Q8_4" value="R_20">20</li>
-									<li><input type="radio" name="Q8_4" value="R_30">30</li>
-									<li><input type="radio" name="Q8_4" value="R_40">40</li>
-									<li><input type="radio" name="Q8_4" value="R_50">50</li>
-									<li><input type="radio" name="Q8_4" value="R_60">60</li>
-									<li><input type="radio" name="Q8_4" value="R_70">70</li>
-									<li><input type="radio" name="Q8_4" value="R_80">80</li>
-									<li><input type="radio" name="Q8_4" value="R_90">90</li>
-									<li><input type="radio" name="Q8_4" value="R_100">100</li>
+									<li><input type="radio" name="Q8_4" value="10">10</li>
+									<li><input type="radio" name="Q8_4" value="20">20</li>
+									<li><input type="radio" name="Q8_4" value="30">30</li>
+									<li><input type="radio" name="Q8_4" value="40">40</li>
+									<li><input type="radio" name="Q8_4" value="50">50</li>
+									<li><input type="radio" name="Q8_4" value="60">60</li>
+									<li><input type="radio" name="Q8_4" value="70">70</li>
+									<li><input type="radio" name="Q8_4" value="80">80</li>
+									<li><input type="radio" name="Q8_4" value="90">90</li>
+									<li><input type="radio" name="Q8_4" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">5. I often do not take my medicines as
+							<td colspan="4">5. I often do not take my medicines as
 								directed.</td>
-							<td colspan="2">
+								</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_5" value="R_10">10</li>
-									<li><input type="radio" name="Q8_5" value="R_20">20</li>
-									<li><input type="radio" name="Q8_5" value="R_30">30</li>
-									<li><input type="radio" name="Q8_5" value="R_40">40</li>
-									<li><input type="radio" name="Q8_5" value="R_50">50</li>
-									<li><input type="radio" name="Q8_5" value="R_60">60</li>
-									<li><input type="radio" name="Q8_5" value="R_70">70</li>
-									<li><input type="radio" name="Q8_5" value="R_80">80</li>
-									<li><input type="radio" name="Q8_5" value="R_90">90</li>
-									<li><input type="radio" name="Q8_5" value="R_100">100</li>
+									<li><input type="radio" name="Q8_5" value="10">10</li>
+									<li><input type="radio" name="Q8_5" value="20">20</li>
+									<li><input type="radio" name="Q8_5" value="30">30</li>
+									<li><input type="radio" name="Q8_5" value="40">40</li>
+									<li><input type="radio" name="Q8_5" value="50">50</li>
+									<li><input type="radio" name="Q8_5" value="60">60</li>
+									<li><input type="radio" name="Q8_5" value="70">70</li>
+									<li><input type="radio" name="Q8_5" value="80">80</li>
+									<li><input type="radio" name="Q8_5" value="90">90</li>
+									<li><input type="radio" name="Q8_5" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">6. No matter what I do, or how hard I try, I
+							<td colspan="4">6. No matter what I do, or how hard I try, I
 								just can not seem to get relief from my symptoms.</td>
-							<td colspan="2">
+								</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_6" value="R_10">10</li>
-									<li><input type="radio" name="Q8_6" value="R_20">20</li>
-									<li><input type="radio" name="Q8_6" value="R_30">30</li>
-									<li><input type="radio" name="Q8_6" value="R_40">40</li>
-									<li><input type="radio" name="Q8_6" value="R_50">50</li>
-									<li><input type="radio" name="Q8_6" value="R_60">60</li>
-									<li><input type="radio" name="Q8_6" value="R_70">70</li>
-									<li><input type="radio" name="Q8_6" value="R_80">80</li>
-									<li><input type="radio" name="Q8_6" value="R_90">90</li>
-									<li><input type="radio" name="Q8_6" value="R_100">100</li>
+									<li><input type="radio" name="Q8_6" value="10">10</li>
+									<li><input type="radio" name="Q8_6" value="20">20</li>
+									<li><input type="radio" name="Q8_6" value="30">30</li>
+									<li><input type="radio" name="Q8_6" value="40">40</li>
+									<li><input type="radio" name="Q8_6" value="50">50</li>
+									<li><input type="radio" name="Q8_6" value="60">60</li>
+									<li><input type="radio" name="Q8_6" value="70">70</li>
+									<li><input type="radio" name="Q8_6" value="80">80</li>
+									<li><input type="radio" name="Q8_6" value="90">90</li>
+									<li><input type="radio" name="Q8_6" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">7. I am not coping effectively with my
+							<td colspan="4">7. I am not coping effectively with my
 								condition.</td>
-							<td colspan="2">
+								</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_7" value="R_10">10</li>
-									<li><input type="radio" name="Q8_7" value="R_20">20</li>
-									<li><input type="radio" name="Q8_7" value="R_30">30</li>
-									<li><input type="radio" name="Q8_7" value="R_40">40</li>
-									<li><input type="radio" name="Q8_7" value="R_50">50</li>
-									<li><input type="radio" name="Q8_7" value="R_60">60</li>
-									<li><input type="radio" name="Q8_7" value="R_70">70</li>
-									<li><input type="radio" name="Q8_7" value="R_80">80</li>
-									<li><input type="radio" name="Q8_7" value="R_90">90</li>
-									<li><input type="radio" name="Q8_7" value="R_100">100</li>
+									<li><input type="radio" name="Q8_7" value="10">10</li>
+									<li><input type="radio" name="Q8_7" value="20">20</li>
+									<li><input type="radio" name="Q8_7" value="30">30</li>
+									<li><input type="radio" name="Q8_7" value="40">40</li>
+									<li><input type="radio" name="Q8_7" value="50">50</li>
+									<li><input type="radio" name="Q8_7" value="60">60</li>
+									<li><input type="radio" name="Q8_7" value="70">70</li>
+									<li><input type="radio" name="Q8_7" value="80">80</li>
+									<li><input type="radio" name="Q8_7" value="90">90</li>
+									<li><input type="radio" name="Q8_7" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">8. Sometimes I feel my condition is beyond
+							<td colspan="4">8. Sometimes I feel my condition is beyond
 								both my and my doctor�s control.</td>
-							<td colspan="2">
+								</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_8" value="R_10">10</li>
-									<li><input type="radio" name="Q8_8" value="R_20">20</li>
-									<li><input type="radio" name="Q8_8" value="R_30">30</li>
-									<li><input type="radio" name="Q8_8" value="R_40">40</li>
-									<li><input type="radio" name="Q8_8" value="R_50">50</li>
-									<li><input type="radio" name="Q8_8" value="R_60">60</li>
-									<li><input type="radio" name="Q8_8" value="R_70">70</li>
-									<li><input type="radio" name="Q8_8" value="R_80">80</li>
-									<li><input type="radio" name="Q8_8" value="R_90">90</li>
-									<li><input type="radio" name="Q8_8" value="R_100">100</li>
+									<li><input type="radio" name="Q8_8" value="10">10</li>
+									<li><input type="radio" name="Q8_8" value="20">20</li>
+									<li><input type="radio" name="Q8_8" value="30">30</li>
+									<li><input type="radio" name="Q8_8" value="40">40</li>
+									<li><input type="radio" name="Q8_8" value="50">50</li>
+									<li><input type="radio" name="Q8_8" value="60">60</li>
+									<li><input type="radio" name="Q8_8" value="70">70</li>
+									<li><input type="radio" name="Q8_8" value="80">80</li>
+									<li><input type="radio" name="Q8_8" value="90">90</li>
+									<li><input type="radio" name="Q8_8" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">9. Sometimes my condition makes me feel like
+							<td colspan="4">9. Sometimes my condition makes me feel like
 								giving up.</td>
-							<td colspan="2">
+								</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_9" value="R_10">10</li>
-									<li><input type="radio" name="Q8_9" value="R_20">20</li>
-									<li><input type="radio" name="Q8_9" value="R_30">30</li>
-									<li><input type="radio" name="Q8_9" value="R_40">40</li>
-									<li><input type="radio" name="Q8_9" value="R_50">50</li>
-									<li><input type="radio" name="Q8_9" value="R_60">60</li>
-									<li><input type="radio" name="Q8_9" value="R_70">70</li>
-									<li><input type="radio" name="Q8_9" value="R_80">80</li>
-									<li><input type="radio" name="Q8_9" value="R_90">90</li>
-									<li><input type="radio" name="Q8_9" value="R_100">100</li>
+									<li><input type="radio" name="Q8_9" value="10">10</li>
+									<li><input type="radio" name="Q8_9" value="20">20</li>
+									<li><input type="radio" name="Q8_9" value="30">30</li>
+									<li><input type="radio" name="Q8_9" value="40">40</li>
+									<li><input type="radio" name="Q8_9" value="50">50</li>
+									<li><input type="radio" name="Q8_9" value="60">60</li>
+									<li><input type="radio" name="Q8_9" value="70">70</li>
+									<li><input type="radio" name="Q8_9" value="80">80</li>
+									<li><input type="radio" name="Q8_9" value="90">90</li>
+									<li><input type="radio" name="Q8_9" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">10. Due to my condition, sometimes I feel I
+							<td colspan="4">10. Due to my condition, sometimes I feel I
 								am a burden to those close to me.</td>
-							<td colspan="2">
+								</tr>
+						<tr>
+							<td colspan="4">
 								<ul class="ruler">
-									<li><input type="radio" name="Q8_10" value="R_10">10</li>
-									<li><input type="radio" name="Q8_10" value="R_20">20</li>
-									<li><input type="radio" name="Q8_10" value="R_30">30</li>
-									<li><input type="radio" name="Q8_10" value="R_40">40</li>
-									<li><input type="radio" name="Q8_10" value="R_50">50</li>
-									<li><input type="radio" name="Q8_10" value="R_60">60</li>
-									<li><input type="radio" name="Q8_10" value="R_70">70</li>
-									<li><input type="radio" name="Q8_10" value="R_80">80</li>
-									<li><input type="radio" name="Q8_10" value="R_90">90</li>
-									<li><input type="radio" name="Q8_10" value="R_100">100</li>
+									<li><input type="radio" name="Q8_10" value="10">10</li>
+									<li><input type="radio" name="Q8_10" value="20">20</li>
+									<li><input type="radio" name="Q8_10" value="30">30</li>
+									<li><input type="radio" name="Q8_10" value="40">40</li>
+									<li><input type="radio" name="Q8_10" value="50">50</li>
+									<li><input type="radio" name="Q8_10" value="60">60</li>
+									<li><input type="radio" name="Q8_10" value="70">70</li>
+									<li><input type="radio" name="Q8_10" value="80">80</li>
+									<li><input type="radio" name="Q8_10" value="90">90</li>
+									<li><input type="radio" name="Q8_10" value="100">100</li>
 								</ul>
 							</td>
 						</tr>
