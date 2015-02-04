@@ -103,7 +103,7 @@ table {
 	border: 1px solid #000;
 	color: #000;
 margin: 0 auto;
-height: 1.7em;
+height: 2.5em;
 padding-right: 3em;
 white-space: nowrap;
 width: 89%;
@@ -111,8 +111,8 @@ width: 89%;
 }
 
 .ruler li {
-padding-left: 2em;
-width: 1em;
+padding-left: 1em;
+width: 2em;
 	/*     margin: .64em -1em -.64em; */
 	text-align: center;
 	position: relative;
