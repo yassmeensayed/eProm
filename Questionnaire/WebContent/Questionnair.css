@@ -41,7 +41,9 @@
 	border-right-style: dotted;
 	border-right-color: red;
 }
-
+#question7 td{
+	text-align: left;
+}
 #question1  td:nth-child(-n+5){
 	border-bottom: thin;
 	border-bottom-style: solid;
@@ -136,6 +138,86 @@ width: 2em;
   max-width: 60%; 
   clear: both;
 }
-/***********************************/
+/*************** Q6 ********************/
+.GridCell
+{
+  width: 20px;
+  height: 20px;
+  border: none;
+  float: left;
+  
+}
+#ContainerQ6 {
+	  
+	 width:500px;
+	
+   height:600px;
+ 
+/*    float:left; */
+   background-image: url(skeleton.jpg);
+   background-repeat: no-repeat;
+   background-position: 20px 60px;
+}
+#painfulJoints H3
+{
+/*    text-align: center; */
+} 
+	#PrShoulder, #SrShoulder
+	{ margin-top: 150px; margin-left: 300px; } 
+	 #PrElbow ,#SrElbow 
+	 {margin-top: 65px; margin-left: 305px;} 
+	 #PrWrist ,#SrWrist 
+	 {margin-top: 47px; margin-left: 330px;}
+	 #PrF9, #SrF9 
+	 {margin-top: -5px; margin-left: 395px;}
+	 #PrF10, #SrF10 
+	 {margin-top: -2px; margin-left: 415px;} 
+	 #PrF11, #SrF11 
+	 {margin-top: 5px; margin-left: 373px;}
+	 #PrF12, #SrF12 
+	 {margin-top: 8px; margin-left: 390px;}
+	 #PrF13, #SrF13 
+	 {margin-top: -40px; margin-left: 355px;}
+	 #PrF14, #SrF14 
+	 {margin-top: -10px; margin-left: 370px;}
+	 #PrF15 ,#SrF15 
+	 {margin-top: -50px; margin-left: 337px;}
+	 #PrF16 ,#SrF16 
+	 {margin-top: -22px; margin-left: 342px;}
+	 #PrF17 ,#SrF17 
+	 {margin-top: -50px; margin-left: 319px;}
+	 #PrF18, #SrF18 
+	 {margin-top: -27px; margin-left: 324px;} 
+	 #PrKnee,#SrKnee
+	 {margin-top: 0px; margin-left: 265px;}
+/* 	 left side  */
 
+	#PlShoulder, #SlShoulder
+	{margin-top: -267px; margin-left: -100px; } 
+	 #PlElbow ,#SlElbow 
+	 {margin-top: -187px; margin-left: -110px;} 
+	 #PlWrist ,#SlWrist 
+	 {margin-top: -117px; margin-left: -135px;}
+	 #PlF9, #SlF9 
+	 {margin-top: -100px; margin-left: -195px;}
+	 #PlF10, #SlF10 
+	 {margin-top: -85px; margin-left: -215px;} 
+	 #PlF11, #SlF11 
+	 {margin-top: -65px; margin-left: -175px;}
+	 #PlF12, #SlF12 
+	 {margin-top: -35px; margin-left: -195px;}
+	 #PlF13, #SlF13 
+	 {margin-top: -50px; margin-left: -160px;}
+	 #PlF14, #SlF14 
+	 {margin-top: -25px; margin-left: -175px;}
+	 #PlF15 ,#SlF15 
+	 {margin-top: -45px; margin-left: -145px;}
+	 #PlF16 ,#SlF16 
+	 {margin-top: -15px; margin-left: -155px;}
+	 #PlF17 ,#SlF17 
+	 {margin-top: -45px; margin-left: -125px;}
+	 #PlF18, #SlF18 
+	 {margin-top: -15px; margin-left: -135px;} 
+	 #PlKnee,#SlKnee
+	 {margin-top: 0px; margin-left: -65px;}
  
