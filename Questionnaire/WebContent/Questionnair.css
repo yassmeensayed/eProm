@@ -113,11 +113,11 @@ width: 89%;
 }
 
 .ruler li {
-padding-left: 1em;
+/*padding-left: 1em;*/
 width: 2em;
 	/*     margin: .64em -1em -.64em; */
-	text-align: center;
-	position: relative;
+	/*text-align: center;*/
+	/*position: relative;*/
 	text-shadow: 1px 1px hsl(60, 60%, 84%);
 }
 
