@@ -152,12 +152,24 @@ width: 2em;
 	 width:500px;
 	
    height:600px;
- 
+ overflow: hidden;
 /*    float:left; */
    background-image: url(skeleton.jpg);
    background-repeat: no-repeat;
    background-position: 20px 60px;
+   
+  
 }
+ 
+#ContainerQ6 img {
+repeat: no-repeat;
+position : absolute;
+/* position: 20px 60px; */
+/* left: 20px; */
+/*     top: 60px; */
+float: left;
+z-index:-1;
+} 
 #painfulJoints H3
 {
 /*    text-align: center; */
