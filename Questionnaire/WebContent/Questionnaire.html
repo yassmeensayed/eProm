@@ -8,6 +8,50 @@
 <script type="text/javascript">
 	var qualityOfLifeCounter = 10;
 	var qol_values = {};
+	var formResults={ Q1HTML = "",Q2HTML ="",Q3HTML = "",Q4HTML = "",
+		Q5HTML = "",Q6HTML = "",Q7HTML = "",Q8HTML = ""
+	}
+	function generateSubmittedHTML(){
+		if(isReadyForSending()){
+			htmlToSend = formResults["Q1HTML"] + "</br >"
+			+ formResults["Q2HTML"] + "</br >"
+			+ formResults["Q3HTML"] + "</br >"
+			+ formResults["Q4HTML"] + "</br >"
+			+ formResults["Q5HTML"] + "</br >"
+			+ formResults["Q6HTML"] + "</br >"
+			+ formResults["Q7HTML"] + "</br >"
+			+ formResults["Q8HTML"] + "</br >"
+		}
+	}
+	function isReadyForSending(){
+		if(isFunctionalDisorderQuestionComplete()&& 
+			isQualityOfLifQuestionComplete() && 
+			isQ2Complete() && 
+			isQ3Complete() && 
+			isQ4Complete() && 
+			isQ5Complete() && 
+			isQ6Complete() &&
+			isQ7Complete() && 			
+			isQ8Complete())
+	}
+	function isQ6Complete(){
+		return true;
+	}
+	function isQ5Complete(){
+		
+		if($('[name="STIFF_LIMBS"]').is(':checked')){
+			if($('[name="STIFF_LIMBS"]').val()== "yes"){
+				minutes_val = jQuery.trim($('[name = "minutes_to_limber"]').val());
+				hours_val = jQuery.trim($('[name = "hours_to_limber"]').val());
+				if(minutes_val !="" && hours_to_limber !=""){
+				return true;
+				}
+			}else{
+				return true;
+			}
+		}
+		return false;
+	}
 	function isFunctionalDisorderQuestionComplete() {
 		if ($('[name="1_a1"]').is(':checked')
 				&& $('[name="1_a2"]').is(':checked')
@@ -75,7 +119,6 @@
 			return false;
 		}
 	}
-
 	function isQol(current) {
 		if (($(current).attr('name')) == "1_b1"
 				|| $(current).attr('name') == "1_b2"
@@ -231,8 +274,7 @@
 			$("#Q8_result").val("");
 		}
 	} 
-	function updateDAS28()
-	{
+	function updateDAS28(){
 		if( $("#Q7_ESR").val().length>0
 				&&  $('[name="Q3"]').is(':checked')) {
  			$("#DAS28").val( 0.56 * Math.sqrt($('[name="Pjoint"]:checked').length) + 0.28 * Math.sqrt($('[name="Sjoint"]:checked').length) + 0.70 * Math.log($("#Q7_ESR").val())  + 0.014 *  $("#Q3_result").val());
@@ -554,7 +596,8 @@
 						</tr>
 					</table></li>
 
-				<li class="question"><table border="1px">
+				<li class="question">
+				<table border="1px">
 
 						<tr>
 							<td colspan="2">
@@ -673,16 +716,16 @@
 					<table>
 						<tr>
 							<td>YES:</td>
-							<td><input type="radio" name="STIFF_LIMBS" /></td>
+							<td><input type="radio" name="STIFF_LIMBS" value="yes"/></td>
 							<td>Please indicate the number of minutes <input type="text"
-								name="minutes_to_limber">, or hours<input type="text"
-								name="hours_to_limber"> until you are as limber as you
+								name="minutes_to_limber"/>, or hours<input type="text"
+								name="hours_to_limber"/> until you are as limber as you
 								will be for the day.
 							</td>
 						</tr>
 						<tr>
 							<td>NO:</td>
-							<td><input type="radio" name="STIFF_LIMBS" /></td>
+							<td><input type="radio" name="STIFF_LIMBS" value="no"/></td>
 						</tr>
 					</table></li>
 
@@ -939,144 +982,144 @@
 					</div>
 					<table id="question7" border="1px" >
 						<tr>
-							<td>Fever <input type="checkbox" value="Fever" id="Fever" /></td>
+							<td>Fever <input type="checkbox" value="Fever" name="Fever" /></td>
 							<td>Dry Eye<input type="checkbox" value="Dry Eye"
-								id="Dry_Eye" /></td>
-							<td>Gynecological Problem<input type="checkbox" value=""
-								id="Gynecological_Problem"></td>
+								name="Dry_Eye" /></td>
+							<td>Gynecological Problem<input type="checkbox" value="Gynecological Problem"
+								name="Gynecological_Problem"></td>
 							<td><b>Cardiovascular Risk Assessment</b>></td>
 						</tr>
 						<tr>
-							<td>Weight gain (&gt; 10 lbs)<input type="checkbox" value=""
-								id=""></td>
-							<td>Dry Mouth <input type="checkbox" value="" id=""></td>
+							<td>Weight gain (&gt; 10 lbs)<input type="checkbox" value=" Weight gain >10"
+								name="Weight_gain"></td>
+							<td>Dry Mouth <input type="checkbox" value="Dry Mouth" name="Dry_Mouth"></td>
 							<td>Short plans for having a baby <input type="checkbox"
-								value="" id=""></td>
-							<td>Age &gt; 50 years old<input type="checkbox" value=""
-								id=""></td>
+								value="Short plans for having a baby" name="Short_plans_for_having_a_baby"></td>
+							<td>Age &gt; 50 years old<input type="checkbox" value="Age > 50 years old"
+								name="Age_50_years_old"></td>
 						</tr>
 						<tr>
-							<td>Weight Loss (&gt; 10 lbs)<input type="checkbox" value=""
-								id=""></td>
-							<td>Other eye problems <input type="checkbox" value="" id=""></td>
+							<td>Weight Loss (&gt; 10 lbs)<input type="checkbox" value="Weight Loss (> 10 lbs)"
+								name="Weight_Loss"></td>
+							<td>Other eye problems <input type="checkbox" value="Other eye problems" name="Other_eye_problems"></td>
 							<td>Sexual Relationship Problems <input type="checkbox"
-								value="" id=""></td>
-							<td>High Blood pressure<input type="checkbox" value="" id=""></td>
+								value="Sexual Relationship Problems" name="Sexual_Relationship_Problems"></td>
+							<td>High Blood pressure<input type="checkbox" value="High Blood pressure" name="High_Blood_pressure"></td>
 						</tr>
 						<tr>
-							<td>Loss of appetite<input type="checkbox" value="" id=""></td>
-							<td>Headache <input type="checkbox" value="" id=""></td>
+							<td>Loss of appetite<input type="checkbox" value="Loss of appetite" name="Loss_of_appetite"></td>
+							<td>Headache <input type="checkbox" value="Headache" name="Headache"></td>
 							<td>Problems with erection (for men) <input type="checkbox"
-								value="" id=""></td>
-							<td>High Cholesterol<input type="checkbox" value="" id=""></td>
+								value="Problems with erection (for men)" name="Problems_with_erection"></td>
+							<td>High Cholesterol<input type="checkbox" value="High Cholesterol" name="High_Cholesterol"></td>
 						</tr>
 						<tr>
-							<td>Trouble swallowing<input type="checkbox" value="" id=""></td>
-							<td>Shortness of breath<input type="checkbox" value="" id=""></td>
-							<td>Kidney problems <input type="checkbox" value="" id=""></td>
-							<td>Current Smoker<input type="checkbox" value="" id=""></td>
+							<td>Trouble swallowing<input type="checkbox" value="Trouble swallowing" name="Trouble_swallowing"></td>
+							<td>Shortness of breath<input type="checkbox" value="Shortness of breath" name="Shortness_of_breath"></td>
+							<td>Knameney problems <input type="checkbox" value="Knameney problems" name="Knameney_problems"></td>
+							<td>Current Smoker<input type="checkbox" value="Current Smoker" name="Current_Smoker"></td>
 						</tr>
 						<tr>
-							<td>Soreness in the mouth<input type="checkbox" value=""
-								id=""></td>
-							<td>Wheezing / asthma<input type="checkbox" value="" id=""></td>
+							<td>Soreness in the mouth<input type="checkbox" value="Soreness in the mouth"
+								name="Soreness_in_the_mouth"></td>
+							<td>Wheezing / asthma<input type="checkbox" value="Wheezing / asthma" name="Wheezing_asthma"></td>
 							<td>Absent from work due to joint pain <input
-								type="checkbox" value="" id=""></td>
-							<td>Ischemic Heart Disease<input type="checkbox" value=""
-								id=""></td>
+								type="checkbox" value="Absent from work due to joint pain" name="Absent_from_work_due_to_joint_pain"></td>
+							<td>Ischemic Heart Disease<input type="checkbox" value="Ischemic Heart Disease"
+								name="Ischemic_Heart_Disease"></td>
 						</tr>
 						<tr>
 							<td>Bleeding/inflammation of the gum <input type="checkbox"
-								value="" id=""></td>
-							<td>Cough <input type="checkbox" value="" id=""></td>
+								value="Bleeding/inflammation of the gum" name="Bleeding_inflammation_of_the_gum"></td>
+							<td>Cough <input type="checkbox" value="Cough" name="Cough"></td>
 							<td>I am registered disabled <input type="checkbox"
-								value="" id=""></td>
-							<td>Stroke<input type="checkbox" value="" id=""></td>
+								value="I am registered disabled" name="I_am_registered_disabled"></td>
+							<td>Stroke<input type="checkbox" value="Stroke" name="Stroke"></td>
 						</tr>
 						<tr>
-							<td>Psoriasis <input type="checkbox" value="" id=""></td>
-							<td>Heartburn<input type="checkbox" value="" id=""></td>
-							<td>Lost Height<input type="checkbox" value="" id=""></td>
-							<td>Irregular Heart beats<input type="checkbox" value=""
-								id=""></td>
+							<td>Psoriasis <input type="checkbox" value="Psoriasis" name="Psoriasis"></td>
+							<td>Heartburn<input type="checkbox" value="Heartburn" name="Heartburn"></td>
+							<td>Lost Height<input type="checkbox" value="Lost Height" name="Lost_Height"></td>
+							<td>Irregular Heart beats<input type="checkbox" value="Irregular Heart beats"
+								name="Irregular_Heart_beats"></td>
 						</tr>
 						<tr>
 							<td>Unusual bruising or bleeding <input type="checkbox"
-								value="" id=""></td>
-							<td>Feeling Sickly / Nausea<input type="checkbox" value=""
-								id=""></td>
-							<td>Had a recent fracture<input type="checkbox" value=""
-								id=""></td>
-							<td>Diabetes Mellitus<input type="checkbox" value="" id=""></td>
+								value="Unusual bruising or bleeding" name="Unusual_bruising_or_bleeding"></td>
+							<td>Feeling Sickly / Nausea<input type="checkbox" value="Feeling Sickly / Nausea"
+								name="Feeling_Sickly_Nausea"></td>
+							<td>Had a recent fracture<input type="checkbox" value="Had a recent fracture"
+								name="Had_a_recent_fracture"></td>
+							<td>Diabetes Mellitus<input type="checkbox" value="Diabetes Mellitus" name="Diabetes_Mellitus"></td>
 						</tr>
 						<tr>
-							<td>Numbness or tingling <input type="checkbox" value=""
-								id=""></td>
-							<td>Constipation<input type="checkbox" value="" id=""></td>
+							<td>Numbness or tingling <input type="checkbox" value="Numbness or tingling"
+								name="Numbness_or_tingling"></td>
+							<td>Constipation<input type="checkbox" value="Constipation" name="Constipation"></td>
 							<td bordercolor="red"><b>Falls Risk Assessment</b></td>
-							<td rowspan=6><table id="question7Evaluation">
+							<td rowspan=6><table name="question7Evaluation">
 									<tr>
 										<td colspan="2" rowspan="2"></td>
 									</tr>
 									<tr></tr>
 									<tr>
-										<td>ESR:<input type="text"  id="Q7_ESR" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
-										<td>CRP:<input type="text"  id="Q7_CPR" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
+										<td>ESR:<input type="text"  name="Q7_ESR" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
+										<td>CRP:<input type="text"  name="Q7_CPR" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
 									</tr>
 									<tr>
-										<td>SJC:<input type="text"  id="Q7_SJC" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
-										<td>RF:<input type="text"  id="Q7_RF" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
+										<td>SJC:<input type="text"  name="Q7_SJC" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
+										<td>RF:<input type="text"  name="Q7_RF" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
 									</tr>
 									<tr>
-										<td>Cholestrol:<input type="text"  id="Q7_CHOL" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
-										<td>Total Chol:HDL<input type="text"  id="Q7_Tchol" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
+										<td>Cholestrol:<input type="text"  name="Q7_CHOL" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
+										<td>Total Chol:HDL<input type="text"  name="Q7_Tchol" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
 										
 									</tr>
 									<tr>
-										<td>B/P:<input type="text"  id="Q7_BP" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
-										<td>BMI:<input type="text"  id="Q7_BMI" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
+										<td>B/P:<input type="text"  name="Q7_BP" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
+										<td>BMI:<input type="text"  name="Q7_BMI" onkeypress='return event.charCode >= 46 && event.charCode <= 57'></input></td>
 									</tr>
 								</table></td>
 
 						</tr>
 						<tr>
-							<td>Loss of hair <input type="checkbox" value="" id=""></td>
-							<td>Diarrhea<input type="checkbox" value="" id=""></td>
-							<td>Loss of your balance <input type="checkbox" value=""
-								id="">Loss of your balance
+							<td>Loss of hair <input type="checkbox" value="Loss of hair" name="Loss_of_hair"></td>
+							<td>Diarrhea<input type="checkbox" value="Diarrhea" name="Diarrhea"></td>
+							<td>Loss of your balance <input type="checkbox" value="Loss of your balance"
+								name="Loss_of_your_balance">Loss of your balance
 							</td>
 
 						</tr>
 						<tr>
-							<td>Swollen Glands <input type="checkbox" value="" id=""></td>
-							<td>Dark or bloody stools <input type="checkbox" value=""
-								id=""></td>
-							<td>Problems with your sight<input type="checkbox" value=""
-								id=""></td>
+							<td>Swollen Glands <input type="checkbox" value="Swollen Glands" name="Swollen_Glands"></td>
+							<td>Dark or bloody stools <input type="checkbox" value="Dark or bloody stools"
+								name="Dark_or_bloody_stools"></td>
+							<td>Problems with your sight<input type="checkbox" value="Problems with your sight"
+								name="Problems_with_your_sight"></td>
 
 						</tr>
 						<tr>
-							<td>Problems with hearing <input type="checkbox" value=""
-								id=""></td>
-							<td>Problems with urination <input type="checkbox" value=""
-								id=""></td>
+							<td>Problems with hearing <input type="checkbox" value="Problems with hearing"
+								name="Problems_with_hearing"></td>
+							<td>Problems with urination <input type="checkbox" value="Problems with urination"
+								name="Problems_with_urination"></td>
 							<td>Weakness of your grip strength<input type="checkbox"
-								value="" id=""></td>
+								value="Weakness of your grip strength" name="Weakness_of_your_grip_strength"></td>
 
 						</tr>
 						<tr>
-							<td>Thyroid Disease <input type="checkbox" value="" id=""></td>
-							<td>Pulmonary Embolism / DVT <input type="checkbox" value=""
-								id=""></td>
+							<td>Thyroname Disease <input type="checkbox" value="Thyroname Disease" name="Thyroname_Disease"></td>
+							<td>Pulmonary Embolism / DVT <input type="checkbox" value="Pulmonary Embolism / DVT"
+								name="Pulmonary_Embolism"></td>
 							<td>&gt;1 Fall in the last year <input type="checkbox"
-								value="" id=""></td>
+								value=">1 Fall in the last year" name="1_Fall_in_the_last_year"></td>
 						<tr>
 							<td>Muscle pain, ache or weakness <input type="checkbox"
-								value="" id=""></td>
-							<td>Diagnosed to have cancer<input type="checkbox" value=""
-								id=""></td>
+								value="Muscle pain, ache or weakness" name="Muscle_pain"></td>
+							<td>Diagnosed to have cancer<input type="checkbox" value="Diagnosed to have cancer"
+								name="Diagnosed_to_have_cancer"></td>
 							<td>Change in Gait / Slow walking speed<input
-								type="checkbox" value="" id=""></td>
+								type="checkbox" value="Change in Gait / Slow walking speed" name="Slow_walking_speed"></td>
 
 						</tr>
 					</table></li>
