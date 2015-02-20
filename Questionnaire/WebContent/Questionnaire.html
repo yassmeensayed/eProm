@@ -8,10 +8,13 @@
 <script type="text/javascript">
 	var qualityOfLifeCounter = 10;
 	var qol_values = {};
-	var formResults={ Q1HTML = "",Q2HTML ="",Q3HTML = "",Q4HTML = "",
-		Q5HTML = "",Q6HTML = "",Q7HTML = "",Q8HTML = ""
+	var formResults={ Q1HTML : "<h5>Question 1: </h5>",Q2HTML :"<h5>Question 2: </h5>",Q3HTML : "<h5>Question 3: </h5>",Q4HTML :"<h5>Question 4: </h5>",
+		Q5HTML :"<h5>Question 5: </h5>",Q6HTML : "<h5>Question 6: </h5>",Q7HTML :"<h5>Question 7: </h5>",Q8HTML :"<h5>Question 8: </h5>"
 	}
+	var q7Values={};
+	var q7Text="";
 	function generateSubmittedHTML(){
+	var htmlToSend="";
 		if(isReadyForSending()){
 			htmlToSend = formResults["Q1HTML"] + "</br >"
 			+ formResults["Q2HTML"] + "</br >"
@@ -22,6 +25,7 @@
 			+ formResults["Q7HTML"] + "</br >"
 			+ formResults["Q8HTML"] + "</br >"
 		}
+		return htmlToSend;
 	}
 	function isReadyForSending(){
 		if(isFunctionalDisorderQuestionComplete()&& 
@@ -32,23 +36,8 @@
 			isQ5Complete() && 
 			isQ6Complete() &&
 			isQ7Complete() && 			
-			isQ8Complete())
-	}
-	function isQ6Complete(){
-		return true;
-	}
-	function isQ5Complete(){
-		
-		if($('[name="STIFF_LIMBS"]').is(':checked')){
-			if($('[name="STIFF_LIMBS"]').val()== "yes"){
-				minutes_val = jQuery.trim($('[name = "minutes_to_limber"]').val());
-				hours_val = jQuery.trim($('[name = "hours_to_limber"]').val());
-				if(minutes_val !="" && hours_to_limber !=""){
-				return true;
-				}
-			}else{
-				return true;
-			}
+			isQ8Complete()){
+			return true;
 		}
 		return false;
 	}
@@ -102,6 +91,35 @@
 		} else {
 			return false;
 		}
+	}
+	function isQ5Complete(){
+		
+		if($('[name="STIFF_LIMBS"]').is(':checked')){
+			if($('[name="STIFF_LIMBS"]').val()== "yes"){
+				minutes_val = jQuery.trim($('[name = "minutes_to_limber"]').val());
+				hours_val = jQuery.trim($('[name = "hours_to_limber"]').val());
+				if(minutes_val !="" && hours_to_limber !=""){
+				return true;
+				}
+			}else{
+				return true;
+			}
+		}
+		return false;
+	}
+	function isQ6Complete(){
+		return true;
+	}
+	function isQ7Complete(){
+		formResults["Q&HTML"] = "Please tick if you have experienced any of the following: ";
+		var text ="";
+		var item;
+		for (item in q7Values) {
+			text += q7Values[item];
+			text += ", ";
+		}							
+		formResults["Q&HTML"]+=text + "</br>";
+		return true;
 	}
 	function isQ8Complete() {
 		if ($('[name="Q8_1"]').is(':checked')
@@ -191,6 +209,40 @@
 			return 0;
 		}
 	}
+	function updateQ1Results(){
+	var question1bStringResult="";
+	var question1aStringResult="";
+		
+		if(isFunctionalDisorderQuestionComplete()){
+			question1aStringResult+="<ol>";
+			question1aStringResult+="<li>"+"Get on and off the toilet? "+ $('[name="1_a1"]:checked').val()+"</li>";
+			question1aStringResult+="<li>"+"Use your grip strength e.g. open previously opened Jars Or lift a saucepan during cooking? "+ $('[name="1_a2"]:checked').val()+"</li>";
+			question1aStringResult+="<li>"+"Dress yourself, including tying shoe laces & doing buttons? "+ $('[name="1_a3"]:checked').val()+"</li>";
+			question1aStringResult+="<li>"+"Stand up from a chair without arms? "+ $('[name="1_a4"]:checked').val()+"</li>";
+			question1aStringResult+="<li>"+"Wait in a line for 15 minutes? "+ $('[name="1_a5"]:checked').val()+"</li>";
+			question1aStringResult+="<li>"+"Reach and get down a 5-pounds-object (such as a bag of sugar) from just above your head? "+ $('[name="1_a6"]:checked').val()+"</li>";
+			question1aStringResult+="<li>"+"Walk outdoors on a flat ground? "+ $('[name="1_a7"]:checked').val()+"</li>";
+			question1aStringResult+="<li>"+"Go Up 2 or more flights of stairs? "+ $('[name="1_a8"]:checked').val()+"</li>";
+			question1aStringResult+="<li>"+"Do house work / DIY jobs around the house? "+ $('[name="1_a9"]:checked').val()+"</li>";
+			question1aStringResult+="<li>"+"Move heavy objects? "+ $('[name="1_a10"]:checked').val()+"</li>";
+			question1aStringResult+="</ol></ br> ";
+		}
+		if(isQualityOfLifQuestionComplete()){
+			question1bStringResult+="<ol>";
+			question1bStringResult+="<li>"+"Get a good night sleep? "+ $('[name="1_b1"]:checked').val()+"</li>";
+			question1bStringResult+="<li>"+"Deal with the usual stresses of daily life? "+ $('[name="1_b2"]:checked').val()+"</li>";
+			question1bStringResult+="<li>"+"Cope with social/ family activities? "+ $('[name="1_b3"]:checked').val()+"</li>";
+			question1bStringResult+="<li>"+"Deal with feelings of anxiety or being nervous? "+ $('[name="1_b4"]:checked').val()+"</li>";
+			question1bStringResult+="<li>"+"Deal with feelings of low self esteem or feeling blue? "+ $('[name="1_b5"]:checked').val()+"</li>";
+			question1bStringResult+="<li>"+"Get going in the morning? "+ $('[name="1_b6"]:checked').val()+"</li>";
+			question1bStringResult+="<li>"+"Do your work as you used to do? "+ $('[name="1_b7"]:checked').val()+"</li>";
+			question1bStringResult+="<li>"+"Deal with any worries about your future? "+ $('[name="1_b8"]:checked').val()+"</li>";
+			question1bStringResult+="<li>"+"Continue doing things you used to do, despitetiredness? "+ $('[name="1_b9"]:checked').val()+"</li>";
+			question1bStringResult+="<li>"+"Continue your relationship with your partner(husband/wife)? "+ $('[name="1_b10"]:checked').val()+"</li>";
+			question1bStringResult+="</ol></ br> ";
+		}
+		formResults["Q1HTML"] = question1aStringResult +question1bStringResult;
+	}
 	function updateQualtyOFLife() {
 		if (isQualityOfLifQuestionComplete()) {
 			qol_result = getValue($('[name="1_b1"]:checked'))
@@ -203,11 +255,13 @@
 					+ getValue($('[name="1_b8"]:checked'))
 					+ getValue($('[name="1_b9"]:checked'))
 					+ getValue($('[name="1_b10"]:checked'));
+			
 			if (qualityOfLifeCounter >= 8) {
 				$("#QoL").val(qol_result / qualityOfLifeCounter);
 			} else {
 				$("#QoL").val("");
 			}
+			updateQ1Results();
 		} else {
 			$("#QoL").val("");
 		}
@@ -230,6 +284,7 @@
 		} else {
 			$("#Fn_Dis").val("");
 		}
+		updateQ1Results();
 	}
 	function updateRapidResult(){
 		if( isFunctionalDisorderQuestionComplete() 
@@ -241,12 +296,14 @@
 	function updateQ2Result() {
 		if (isQ2Complete()) {
 			$("#Q2_result").val($('[name="Q2"]:checked').val());
+			formResults["Q2HTML"] = "How much PAIN have you had because of your arthritis/ joint or body ache OVER THE PAST WEEK? " + $("#Q2_result").val() +"</ br>";
 			updateRapidResult();
 		}
 	}
 	function updateQ3Result() {
 		if (isQ3Complete()) {
 			$("#Q3_result").val($('[name="Q3"]:checked').val());
+			formResults["Q3HTML"] = "Considering all the ways your arthritis/ joint or body ache may be affecting you AT THIS TIME. Please select the number that best indicates how well you are doing: " + $("#Q3_result").val() +"</ br>";
 			updateRapidResult();
 			updateDAS28();
 		}
@@ -254,6 +311,8 @@
 	function updateQ4Result() {
 		if (isQ4Complete()) {
 			$("#Q4_result").val($('[name="Q4"]:checked').val());
+			formResults["Q4HTML"] = "How much of a problem has UNUSUAL FATIGUE or tiredness been"+
+									" for you OVER THE PAST WEEK? " + $("#Q4_result").val() +"</ br>";
 		}
 	}
 	function updateQ8Result() {
@@ -281,6 +340,14 @@
             }  
 		else
 			{$("#DAS28").val("");}
+	}
+	function updateQ5Result(){
+		if(isQ5Complete()){
+			minutes_val = jQuery.trim($('[name = "minutes_to_limber"]').val());
+			hours_val = jQuery.trim($('[name = "hours_to_limber"]').val());
+			formResults["Q5HTML"] = "THE LAST WEEK when you awakened in the morning, did you feel "+
+						"stiff? " + $("#STIFF_LIMBS").val() +", minutes= "+ minutes_val+", hours= "+hours_val+"</ br> ";
+		}
 	}
 	$(document).ready(function() {
 		$('[name="Q2"]').click(function() {
@@ -391,6 +458,10 @@
 		$('[name="Sjoint"]').change(function() {
 			updateDAS28();
 		});
+		$('[name="STIFF_LIMBS"]').click(function() {
+			updateQ5Result();
+		}); 
+		
 	});
 </script>
 
@@ -432,8 +503,7 @@
 							<td></td>
 						</tr>
 						<tr>
-							<td>2. Use your grip strength e.g. open previously opened
-								Jars Or lift a saucepan during cooking?</td>
+							<td>2. Use your grip strength e.g. open previously opened Jars Or lift a saucepan during cooking?</td>
 							<td><input type="radio" name="1_a2" value="ANY" /></td>
 							<td><input type="radio" name="1_a2" value="SOME" /></td>
 							<td><input type="radio" name="1_a2" value="MUCH" /></td>
@@ -443,8 +513,7 @@
 
 						</tr>
 						<tr>
-							<td>3. Dress yourself, including tying shoe laces &amp;
-								doing buttons?</td>
+							<td>3. Dress yourself, including tying shoe laces &amp; doing buttons?</td>
 							<td><input type="radio" name="1_a3" value="ANY" /></td>
 							<td><input type="radio" name="1_a3" value="SOME" /></td>
 							<td><input type="radio" name="1_a3" value="MUCH" /></td>
@@ -465,8 +534,7 @@
 							<td><input type="radio" name="1_a5" value="UNABLE" /></td>
 						</tr>
 						<tr>
-							<td>6. Reach and get down a 5-pounds-object (such as a bag
-								of sugar) from just above your head?</td>
+							<td>6. Reach and get down a 5-pounds-object (such as a bag of sugar) from just above your head?</td>
 							<td><input type="radio" name="1_a6" value="ANY" /></td>
 							<td><input type="radio" name="1_a6" value="SOME" /></td>
 							<td><input type="radio" name="1_a6" value="MUCH" /></td>
@@ -577,8 +645,7 @@
 							<td><input type="radio" name="1_b8" value="NOTAPPLICABLE" /></td>
 						</tr>
 						<tr>
-							<td>9. Continue doing things you used to do, despite
-								tiredness?</td>
+							<td>9. Continue doing things you used to do, despitetiredness?</td>
 							<td><input type="radio" name="1_b9" value="ANY" /></td>
 							<td><input type="radio" name="1_b9" value="SOME" /></td>
 							<td><input type="radio" name="1_b9" value="MUCH" /></td>
@@ -586,18 +653,18 @@
 							<td><input type="radio" name="1_b9" value="NOTAPPLICABLE" /></td>
 						</tr>
 						<tr>
-							<td>10. Continue your relationship with your partner
-								(husband/wife)?</td>
+							<td>10. Continue your relationship with your partner(husband/wife)?</td>
 							<td><input type="radio" name="1_b10" value="ANY" /></td>
 							<td><input type="radio" name="1_b10" value="SOME" /></td>
 							<td><input type="radio" name="1_b10" value="MUCH" /></td>
 							<td><input type="radio" name="1_b10" value="UNABLE" /></td>
 							<td><input type="radio" name="1_b10" value="NOTAPPLICABLE" /></td>
 						</tr>
-					</table></li>
+					</table>
+				</li>
 
 				<li class="question">
-				<table border="1px">
+					<table border="1px">
 
 						<tr>
 							<td colspan="2">
@@ -633,14 +700,14 @@
 							<td>PAIN As Bad As It Could Be</td>
 						</tr>
 
-					</table></li>
+					</table>
+				</li>
 				<li class="question">
 					<table border="1px">
 						<tr>
 							<td colspan="2">
 								<div class="questionHeader">
-									3. Considering all the ways your arthritis/ joint or body ache
-									may be affecting you AT THIS TIME <br> <span
+									3. Considering all the ways your arthritis/ joint or body ache may be affecting you AT THIS TIME <br> <span
 										class="notice">Please select the number that best
 										indicates how well you are doing: </span><br>
 								</div>
@@ -675,8 +742,6 @@
 					<table border="1px">
 						<tr>
 							<td colspan="2">
-
-
 								<div class="questionHeader">
 									4. How much of a problem has UNUSUAL FATIGUE or tiredness been
 									for you OVER THE PAST WEEK? <br> <span class="notice">Please
@@ -710,9 +775,11 @@
 					</table>
 
 				</li>
-				<li class="question"><div class="questionHeader">5. OVER
+				<li class="question">
+					<div class="questionHeader">5. OVER
 						THE LAST WEEK when you awakened in the morning, did you feel
-						stiff?</div>
+						stiff?
+					</div>
 					<table>
 						<tr>
 							<td>YES:</td>
@@ -727,8 +794,8 @@
 							<td>NO:</td>
 							<td><input type="radio" name="STIFF_LIMBS" value="no"/></td>
 						</tr>
-					</table></li>
-
+					</table>
+				</li>
 				<li>
 					<div class="questionHeader">
 						6. Please tick in the appropriate box to indicate in which of your
@@ -981,81 +1048,86 @@
 						following <span class="notice">OVER THE LAST MONTH:</span>
 					</div>
 					<table id="question7" border="1px" >
+					<script type="text/javascript">
+						function addQ7Val(checkBox){
+						//if(this.checked){q7Values[this.name]=this.value}
+							if(checkBox.checked){
+								q7Values[checkBox.name]=checkBox.value;
+							}
+						}
+					</script>
 						<tr>
-							<td>Fever <input type="checkbox" value="Fever" name="Fever" /></td>
+							<td>Fever <input type="checkbox" value="Fever" name="Fever_1" onclick="addQ7Val(this)"/></td>
 							<td>Dry Eye<input type="checkbox" value="Dry Eye"
-								name="Dry_Eye" /></td>
+								name="Dry_Eye" onclick="addQ7Val(this)"/></td>
 							<td>Gynecological Problem<input type="checkbox" value="Gynecological Problem"
-								name="Gynecological_Problem"></td>
+								name="Gynecological_Problem" onclick="addQ7Val(this)"/></td>
 							<td><b>Cardiovascular Risk Assessment</b>></td>
 						</tr>
 						<tr>
 							<td>Weight gain (&gt; 10 lbs)<input type="checkbox" value=" Weight gain >10"
-								name="Weight_gain"></td>
-							<td>Dry Mouth <input type="checkbox" value="Dry Mouth" name="Dry_Mouth"></td>
-							<td>Short plans for having a baby <input type="checkbox"
-								value="Short plans for having a baby" name="Short_plans_for_having_a_baby"></td>
-							<td>Age &gt; 50 years old<input type="checkbox" value="Age > 50 years old"
-								name="Age_50_years_old"></td>
+								name="Weight_gain" onclick="addQ7Val(this)"/></td>
+							<td>Dry Mouth <input type="checkbox" value="Dry Mouth" name="Dry_Mouth" onclick="addQ7Val(this)"/></td>
+							<td>Short plans for having a baby 
+								<input type="checkbox" value="Short plans for having a baby" name="Short_plans_for_having_a_baby" onclick="addQ7Val(this)"/></td>
+							<td>Age &gt; 50 years old<input type="checkbox" value="Age > 50 years old" name="Age_50_years_old" onclick="addQ7Val(this)"/></td>
 						</tr>
 						<tr>
-							<td>Weight Loss (&gt; 10 lbs)<input type="checkbox" value="Weight Loss (> 10 lbs)"
-								name="Weight_Loss"></td>
-							<td>Other eye problems <input type="checkbox" value="Other eye problems" name="Other_eye_problems"></td>
+							<td>Weight Loss (&gt; 10 lbs)<input type="checkbox" value="Weight Loss (> 10 lbs)" name="Weight_Loss" onclick="addQ7Val(this)"/></td>
+							<td>Other eye problems <input type="checkbox" value="Other eye problems" name="Other_eye_problems" onclick="addQ7Val(this)"/></td>
 							<td>Sexual Relationship Problems <input type="checkbox"
-								value="Sexual Relationship Problems" name="Sexual_Relationship_Problems"></td>
-							<td>High Blood pressure<input type="checkbox" value="High Blood pressure" name="High_Blood_pressure"></td>
+								value="Sexual Relationship Problems" name="Sexual_Relationship_Problems" onclick="addQ7Val(this)"/></td>
+							<td>High Blood pressure<input type="checkbox" value="High Blood pressure" name="High_Blood_pressure" onclick="addQ7Val(this)"/></td>
 						</tr>
 						<tr>
-							<td>Loss of appetite<input type="checkbox" value="Loss of appetite" name="Loss_of_appetite"></td>
-							<td>Headache <input type="checkbox" value="Headache" name="Headache"></td>
+							<td>Loss of appetite<input type="checkbox" value="Loss of appetite" name="Loss_of_appetite" onclick="addQ7Val(this)"/></td>
+							<td>Headache <input type="checkbox" value="Headache" name="Headache" onclick="addQ7Val(this)"/></td>
 							<td>Problems with erection (for men) <input type="checkbox"
-								value="Problems with erection (for men)" name="Problems_with_erection"></td>
-							<td>High Cholesterol<input type="checkbox" value="High Cholesterol" name="High_Cholesterol"></td>
+								value="Problems with erection (for men)" name="Problems_with_erection" onclick="addQ7Val(this)"/></td>
+							<td>High Cholesterol<input type="checkbox" value="High Cholesterol" name="High_Cholesterol" onclick="addQ7Val(this)"/></td>
 						</tr>
 						<tr>
-							<td>Trouble swallowing<input type="checkbox" value="Trouble swallowing" name="Trouble_swallowing"></td>
-							<td>Shortness of breath<input type="checkbox" value="Shortness of breath" name="Shortness_of_breath"></td>
-							<td>Knameney problems <input type="checkbox" value="Knameney problems" name="Knameney_problems"></td>
-							<td>Current Smoker<input type="checkbox" value="Current Smoker" name="Current_Smoker"></td>
+							<td>Trouble swallowing<input type="checkbox" value="Trouble swallowing" name="Trouble_swallowing" onclick="addQ7Val(this)"/></td>
+							<td>Shortness of breath<input type="checkbox" value="Shortness of breath" name="Shortness_of_breath" onclick="addQ7Val(this)"/></td>
+							<td>Knameney problems <input type="checkbox" value="Knameney problems" name="Knameney_problems" onclick="addQ7Val(this)"/></td>
+							<td>Current Smoker<input type="checkbox" value="Current Smoker" name="Current_Smoker" onclick="addQ7Val(this)"/></td>
 						</tr>
 						<tr>
 							<td>Soreness in the mouth<input type="checkbox" value="Soreness in the mouth"
-								name="Soreness_in_the_mouth"></td>
-							<td>Wheezing / asthma<input type="checkbox" value="Wheezing / asthma" name="Wheezing_asthma"></td>
+								name="Soreness_in_the_mouth" onclick="addQ7Val(this)"/></td>
+							<td>Wheezing / asthma<input type="checkbox" value="Wheezing / asthma" name="Wheezing_asthma" onclick="addQ7Val(this)"/></td>
 							<td>Absent from work due to joint pain <input
-								type="checkbox" value="Absent from work due to joint pain" name="Absent_from_work_due_to_joint_pain"></td>
+								type="checkbox" value="Absent from work due to joint pain" name="Absent_from_work_due_to_joint_pain" onclick="addQ7Val(this)"/></td>
 							<td>Ischemic Heart Disease<input type="checkbox" value="Ischemic Heart Disease"
-								name="Ischemic_Heart_Disease"></td>
+								name="Ischemic_Heart_Disease" onclick="addQ7Val(this)"/></td>
 						</tr>
 						<tr>
 							<td>Bleeding/inflammation of the gum <input type="checkbox"
-								value="Bleeding/inflammation of the gum" name="Bleeding_inflammation_of_the_gum"></td>
-							<td>Cough <input type="checkbox" value="Cough" name="Cough"></td>
+								value="Bleeding/inflammation of the gum" name="Bleeding_inflammation_of_the_gum" onclick="addQ7Val(this)"/></td>
+							<td>Cough <input type="checkbox" value="Cough" name="Cough" onclick="addQ7Val(this)"/></td>
 							<td>I am registered disabled <input type="checkbox"
-								value="I am registered disabled" name="I_am_registered_disabled"></td>
-							<td>Stroke<input type="checkbox" value="Stroke" name="Stroke"></td>
+								value="I am registered disabled" name="I_am_registered_disabled" onclick="addQ7Val(this)"/></td>
+							<td>Stroke<input type="checkbox" value="Stroke" name="Stroke" onclick="addQ7Val(this)"/></td>
 						</tr>
 						<tr>
-							<td>Psoriasis <input type="checkbox" value="Psoriasis" name="Psoriasis"></td>
-							<td>Heartburn<input type="checkbox" value="Heartburn" name="Heartburn"></td>
-							<td>Lost Height<input type="checkbox" value="Lost Height" name="Lost_Height"></td>
-							<td>Irregular Heart beats<input type="checkbox" value="Irregular Heart beats"
-								name="Irregular_Heart_beats"></td>
+							<td>Psoriasis <input type="checkbox" value="Psoriasis" name="Psoriasis" onclick="addQ7Val(this)"/></td>
+							<td>Heartburn<input type="checkbox" value="Heartburn" name="Heartburn" onclick="addQ7Val(this)"/></td>
+							<td>Lost Height<input type="checkbox" value="Lost Height" name="Lost_Height" onclick="addQ7Val(this)"/></td>
+							<td>Irregular Heart beats<input type="checkbox" value="Irregular Heart beats" name="Irregular_Heart_beats" onclick="addQ7Val(this)"/></td>
 						</tr>
 						<tr>
 							<td>Unusual bruising or bleeding <input type="checkbox"
-								value="Unusual bruising or bleeding" name="Unusual_bruising_or_bleeding"></td>
+								value="Unusual bruising or bleeding" name="Unusual_bruising_or_bleeding" onclick="addQ7Val(this)"/></td>
 							<td>Feeling Sickly / Nausea<input type="checkbox" value="Feeling Sickly / Nausea"
-								name="Feeling_Sickly_Nausea"></td>
+								name="Feeling_Sickly_Nausea" onclick="addQ7Val(this)"/></td>
 							<td>Had a recent fracture<input type="checkbox" value="Had a recent fracture"
-								name="Had_a_recent_fracture"></td>
-							<td>Diabetes Mellitus<input type="checkbox" value="Diabetes Mellitus" name="Diabetes_Mellitus"></td>
+								name="Had_a_recent_fracture" onclick="addQ7Val(this)"/></td>
+							<td>Diabetes Mellitus<input type="checkbox" value="Diabetes Mellitus" name="Diabetes_Mellitus" onclick="addQ7Val(this)"/></td>
 						</tr>
 						<tr>
 							<td>Numbness or tingling <input type="checkbox" value="Numbness or tingling"
-								name="Numbness_or_tingling"></td>
-							<td>Constipation<input type="checkbox" value="Constipation" name="Constipation"></td>
+								name="Numbness_or_tingling" onclick="addQ7Val(this)"/></td>
+							<td>Constipation<input type="checkbox" value="Constipation" name="Constipation" onclick="addQ7Val(this)"/></td>
 							<td bordercolor="red"><b>Falls Risk Assessment</b></td>
 							<td rowspan=6><table name="question7Evaluation">
 									<tr>
@@ -1083,43 +1155,43 @@
 
 						</tr>
 						<tr>
-							<td>Loss of hair <input type="checkbox" value="Loss of hair" name="Loss_of_hair"></td>
-							<td>Diarrhea<input type="checkbox" value="Diarrhea" name="Diarrhea"></td>
+							<td>Loss of hair <input type="checkbox" value="Loss of hair" name="Loss_of_hair" onclick="addQ7Val(this)"/></td>
+							<td>Diarrhea<input type="checkbox" value="Diarrhea" name="Diarrhea" onclick="addQ7Val(this)"/></td>
 							<td>Loss of your balance <input type="checkbox" value="Loss of your balance"
-								name="Loss_of_your_balance">Loss of your balance
+								name="Loss_of_your_balance" onclick="addQ7Val(this)"/>Loss of your balance
 							</td>
 
 						</tr>
 						<tr>
-							<td>Swollen Glands <input type="checkbox" value="Swollen Glands" name="Swollen_Glands"></td>
+							<td>Swollen Glands <input type="checkbox" value="Swollen Glands" name="Swollen_Glands" onclick="addQ7Val(this)"/></td>
 							<td>Dark or bloody stools <input type="checkbox" value="Dark or bloody stools"
-								name="Dark_or_bloody_stools"></td>
+								name="Dark_or_bloody_stools" onclick="addQ7Val(this)"/></td>
 							<td>Problems with your sight<input type="checkbox" value="Problems with your sight"
-								name="Problems_with_your_sight"></td>
+								name="Problems_with_your_sight" onclick="addQ7Val(this)"/></td>
 
 						</tr>
 						<tr>
 							<td>Problems with hearing <input type="checkbox" value="Problems with hearing"
-								name="Problems_with_hearing"></td>
+								name="Problems_with_hearing" onclick="addQ7Val(this)"/></td>
 							<td>Problems with urination <input type="checkbox" value="Problems with urination"
-								name="Problems_with_urination"></td>
+								name="Problems_with_urination" onclick="addQ7Val(this)"/></td>
 							<td>Weakness of your grip strength<input type="checkbox"
-								value="Weakness of your grip strength" name="Weakness_of_your_grip_strength"></td>
+								value="Weakness of your grip strength" name="Weakness_of_your_grip_strength" onclick="addQ7Val(this)"/></td>
 
 						</tr>
 						<tr>
-							<td>Thyroname Disease <input type="checkbox" value="Thyroname Disease" name="Thyroname_Disease"></td>
+							<td>Thyroname Disease <input type="checkbox" value="Thyroname Disease" name="Thyroname_Disease" onclick="addQ7Val(this)"/></td>
 							<td>Pulmonary Embolism / DVT <input type="checkbox" value="Pulmonary Embolism / DVT"
-								name="Pulmonary_Embolism"></td>
+								name="Pulmonary_Embolism" onclick="addQ7Val(this)"/></td>
 							<td>&gt;1 Fall in the last year <input type="checkbox"
-								value=">1 Fall in the last year" name="1_Fall_in_the_last_year"></td>
+								value=">1 Fall in the last year" name="1_Fall_in_the_last_year" onclick="addQ7Val(this)"/></td>
 						<tr>
 							<td>Muscle pain, ache or weakness <input type="checkbox"
-								value="Muscle pain, ache or weakness" name="Muscle_pain"></td>
+								value="Muscle pain, ache or weakness" name="Muscle_pain" onclick="addQ7Val(this)"/></td>
 							<td>Diagnosed to have cancer<input type="checkbox" value="Diagnosed to have cancer"
-								name="Diagnosed_to_have_cancer"></td>
+								name="Diagnosed_to_have_cancer" onclick="addQ7Val(this)"/></td>
 							<td>Change in Gait / Slow walking speed<input
-								type="checkbox" value="Change in Gait / Slow walking speed" name="Slow_walking_speed"></td>
+								type="checkbox" value="Change in Gait / Slow walking speed" name="Slow_walking_speed" onclick="addQ7Val(this)"/></td>
 
 						</tr>
 					</table></li>
