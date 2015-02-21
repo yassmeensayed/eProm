@@ -13,9 +13,18 @@
 	}
 	var q7Values={};
 	var q7Text="";
+	function SumbitForm(){ 
+		//if(isReadyForSending()){ 
+			$.post( "sendMail.php",{ message: generateSubmittedHTML()} 
+				 , alert( "success" ));
+			alert ( generateSubmittedHTML());
+		//} 
+		//else 
+			//alert("Please fill all fields");
+	}
 	function generateSubmittedHTML(){
 	var htmlToSend="";
-		if(isReadyForSending()){
+		//if(isReadyForSending()){
 			htmlToSend = formResults["Q1HTML"] + "</br >"
 			+ formResults["Q2HTML"] + "</br >"
 			+ formResults["Q3HTML"] + "</br >"
@@ -24,7 +33,7 @@
 			+ formResults["Q6HTML"] + "</br >"
 			+ formResults["Q7HTML"] + "</br >"
 			+ formResults["Q8HTML"] + "</br >"
-		}
+		//}
 		return htmlToSend;
 	}
 	function isReadyForSending(){
@@ -108,17 +117,27 @@
 		return false;
 	}
 	function isQ6Complete(){
+		formResults["Q6HTML"] += "Selected Tender Joints: <br>";
+		$('[name="Pjoint"]').each(function(){
+			formResults["Q6HTML"] += $('[name="Pjoint"]:checked').val();
+			formResults["Q6HTML"] += ",";
+			});
+		formResults["Q6HTML"] += "<br>Selected Swollen Joints: <br>";
+		$('[name="Sjoint"]').each(function(){
+			formResults["Q6HTML"] += $('[name="Sjoint"]:checked').val();
+			formResults["Q6HTML"] += ",";
+			});
 		return true;
 	}
 	function isQ7Complete(){
-		formResults["Q&HTML"] = "Please tick if you have experienced any of the following: ";
+		formResults["Q7HTML"] += "Please tick if you have experienced any of the following: ";
 		var text ="";
 		var item;
 		for (item in q7Values) {
 			text += q7Values[item];
 			text += ", ";
 		}							
-		formResults["Q&HTML"]+=text + "</br>";
+		formResults["Q7HTML"]+=text + "</br>";
 		return true;
 	}
 	function isQ8Complete() {
@@ -241,7 +260,7 @@
 			question1bStringResult+="<li>"+"Continue your relationship with your partner(husband/wife)? "+ $('[name="1_b10"]:checked').val()+"</li>";
 			question1bStringResult+="</ol></ br> ";
 		}
-		formResults["Q1HTML"] = question1aStringResult +question1bStringResult;
+		formResults["Q1HTML"] += question1aStringResult +question1bStringResult;
 	}
 	function updateQualtyOFLife() {
 		if (isQualityOfLifQuestionComplete()) {
@@ -296,14 +315,14 @@
 	function updateQ2Result() {
 		if (isQ2Complete()) {
 			$("#Q2_result").val($('[name="Q2"]:checked').val());
-			formResults["Q2HTML"] = "How much PAIN have you had because of your arthritis/ joint or body ache OVER THE PAST WEEK? " + $("#Q2_result").val() +"</ br>";
+			formResults["Q2HTML"] += "How much PAIN have you had because of your arthritis/ joint or body ache OVER THE PAST WEEK? " + $("#Q2_result").val() +"</ br>";
 			updateRapidResult();
 		}
 	}
 	function updateQ3Result() {
 		if (isQ3Complete()) {
 			$("#Q3_result").val($('[name="Q3"]:checked').val());
-			formResults["Q3HTML"] = "Considering all the ways your arthritis/ joint or body ache may be affecting you AT THIS TIME. Please select the number that best indicates how well you are doing: " + $("#Q3_result").val() +"</ br>";
+			formResults["Q3HTML"] += "Considering all the ways your arthritis/ joint or body ache may be affecting you AT THIS TIME. Please select the number that best indicates how well you are doing: " + $("#Q3_result").val() +"</ br>";
 			updateRapidResult();
 			updateDAS28();
 		}
@@ -311,7 +330,7 @@
 	function updateQ4Result() {
 		if (isQ4Complete()) {
 			$("#Q4_result").val($('[name="Q4"]:checked').val());
-			formResults["Q4HTML"] = "How much of a problem has UNUSUAL FATIGUE or tiredness been"+
+			formResults["Q4HTML"] += "How much of a problem has UNUSUAL FATIGUE or tiredness been"+
 									" for you OVER THE PAST WEEK? " + $("#Q4_result").val() +"</ br>";
 		}
 	}
@@ -329,14 +348,31 @@
 					+ parseInt($('[name="Q8_10"]:checked').val());
 
 			$("#Q8_result").val(totalSum / 100);
+			
+			var question8StringResult ="";
+			question8StringResult+="<br><ol>";
+			question8StringResult+="<li>"+"1. My condition is controlling my life. "+ $('[name="Q8_1"]:checked').val()+"</li>";
+			question8StringResult+="<li>"+"2. I would feel helpless if I could not rely on other people for help with my condition. "+ $('[name="Q8_2"]:checked').val()+"</li>";
+			question8StringResult+="<li>"+"3. I am concerned that medicines can not help me. "+ $('[name="Q8_3"]:checked').val()+"</li>";
+			question8StringResult+="<li>"+"4. I have concerns regarding side effects of medications used to treat my condition. "+ $('[name="Q8_4"]:checked').val()+"</li>";
+			question8StringResult+="<li>"+"5. I often do not take my medicines as directed. "+ $('[name="Q8_5"]:checked').val()+"</li>";
+			question8StringResult+="<li>"+"6. No matter what I do, or how hard I try, I just can not seem to get relief from my symptoms. "+ $('[name="Q8_6"]:checked').val()+"</li>";
+			question8StringResult+="<li>"+"7. I am not coping effectively with my condition. "+ $('[name="Q8_7"]:checked').val()+"</li>";
+			question8StringResult+="<li>"+"8. Sometimes I feel my condition is beyond both my and my doctor's control. "+ $('[name="Q8_8"]:checked').val()+"</li>";
+			question8StringResult+="<li>"+"9. Sometimes my condition makes me feel like giving up. "+ $('[name="Q8_9"]:checked').val()+"</li>";
+			question8StringResult+="<li>"+"10. Due to my condition, sometimes I feel I am a burden to those close to me. "+ $('[name="Q8_10"]:checked').val()+"</li>";
+			question8StringResult+="</ol></ br> ";
+			formResults["Q8HTML"] += question8StringResult;
+			
 		} else {
 			$("#Q8_result").val("");
 		}
 	} 
-	function updateDAS28(){
-		if( $("#Q7_ESR").val().length>0
+	function updateDAS28(){ 
+		if( $('[name="Q7_ESR"]').val().length>0
 				&&  $('[name="Q3"]').is(':checked')) {
- 			$("#DAS28").val( 0.56 * Math.sqrt($('[name="Pjoint"]:checked').length) + 0.28 * Math.sqrt($('[name="Sjoint"]:checked').length) + 0.70 * Math.log($("#Q7_ESR").val())  + 0.014 *  $("#Q3_result").val());
+			alert("test");
+ 			$("#DAS28").val( 0.56 * Math.sqrt($('[name="Pjoint"]:checked').length) + 0.28 * Math.sqrt($('[name="Sjoint"]:checked').length)+ 0.70 * Math.log($('[name="Q7_ESR"]').val())+ 0.014 *  $("#Q3_result").val()); 
             }  
 		else
 			{$("#DAS28").val("");}
@@ -345,7 +381,7 @@
 		if(isQ5Complete()){
 			minutes_val = jQuery.trim($('[name = "minutes_to_limber"]').val());
 			hours_val = jQuery.trim($('[name = "hours_to_limber"]').val());
-			formResults["Q5HTML"] = "THE LAST WEEK when you awakened in the morning, did you feel "+
+			formResults["Q5HTML"] += "THE LAST WEEK when you awakened in the morning, did you feel "+
 						"stiff? " + $("#STIFF_LIMBS").val() +", minutes= "+ minutes_val+", hours= "+hours_val+"</ br> ";
 		}
 	}
@@ -449,7 +485,7 @@
 		$('[name="Q8_10"]').click(function() {
 			updateQ8Result();
 		}); 
-		$("#Q7_ESR").change(function() {
+		$('[name="Q7_ESR"]').change(function() {
 			updateDAS28();
 		}); 
 		$('[name="Pjoint"]').change(function() {
@@ -807,117 +843,117 @@
 <!-- 	<img src="skeleton.jpg"> -->
 <!-- 	painful right side  -->
 	 <div class="GridCell" id="PrShoulder">
-	 <input name="Pjoint" type="checkbox" >  
+	 <input name="Pjoint" value="rightShoulder" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="PrElbow">
-	 <input name="Pjoint" type="checkbox" >  
+	 <input name="Pjoint" value="rightElbow" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="PrWrist">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint"  value="rightWrist" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PrF9">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint"  value="Right thumb knuckle"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PrF10">
-	 <input name="Pjoint" type="checkbox" >  
+	 <input name="Pjoint" value="joint at the top of Right thumb" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="PrF11">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value=" Right index finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PrF12">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value=" Right index finger middle joint" type="checkbox" > 
 	  </div>
 	 
 	  <div class="GridCell" id="PrF13">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint"  value="Right middle finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PrF14">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint"  value=" Right middle finger middle joint" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PrF15">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value="Right ring finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PrF16">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value="Right ring finger middle joint" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PrF17">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value="Right little finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PrF18">
-	 <input name="Pjoint" type="checkbox" >  
+	 <input name="Pjoint" value="Right little finger middle joint" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="PrKnee">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value="Right Knee" type="checkbox" > 
 	 </div>
 	 
 	 
 	 <div class="GridCell" id="PlShoulder">
-	 <input name="Pjoint" type="checkbox" >  
+	 <input name="Pjoint" value="left shoulder" type="checkbox" >  
 	 </div>
 	 
 	 
 	 <div class="GridCell" id="PlElbow">
-	 <input name="Pjoint" type="checkbox" >  
+	 <input name="Pjoint" value="Left Elbow" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="PlWrist">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value="Left Wrist" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PlF9">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value="Left thumb knuckle"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PlF10">
-	 <input name="Pjoint" type="checkbox" >  
+	 <input name="Pjoint" value="joint at the top of Left thumb" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="PlF11">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint"  value=" Left index finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PlF12">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint"  value=" Left index finger middle joint" type="checkbox" > 
 	  </div>
 	 
 	  <div class="GridCell" id="PlF13">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value="Left middle finger knuckle"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PlF14">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint"  value=" Left middle finger middle joint"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PlF15">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint"  value="Left ring finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PlF16">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value="Left ring finger middle joint"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PlF17">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint"  value="Left little finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="PlF18">
-	 <input name="Pjoint" type="checkbox" >  
+	 <input name="Pjoint"  value="Left little finger middle joint"  type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="PlKnee">
-	 <input name="Pjoint" type="checkbox" > 
+	 <input name="Pjoint" value=" Left Knee" type="checkbox" > 
 	 </div>
 	 </div>
 <!-- 	 ------------------------------------------ -->
@@ -927,117 +963,117 @@
 	  
  
 	 <div class="GridCell" id="SrShoulder">
-	 <input name="Sjoint" type="checkbox" >  
+	 <input name="Sjoint"  value="rightShoulder" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="SrElbow">
-	 <input name="Sjoint" type="checkbox" >  
+	 <input name="Sjoint"  value="rightElbow" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="SrWrist">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value="rightWrist"  type="checkbox" > 
 	 </div>
 	 
-	 <div class="GridCell" id="SrF9">
-	 <input name="Sjoint" type="checkbox" > 
+	 <div class="GridCell"   id="SrF9">
+	 <input name="Sjoint"  value="Left thumb knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SrF10">
-	 <input name="Sjoint" type="checkbox" >  
+	 <input name="Sjoint"  value="Right at the top of Right thumb" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="SrF11">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint" value=" Right index finger knuckle"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SrF12">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value=" Right index finger middle joint" type="checkbox" > 
 	  </div>
 	 
 	  <div class="GridCell" id="SrF13">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value="Right middle finger knuckle"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SrF14">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value=" Right middle finger middle joint" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SrF15">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value="Right ring finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SrF16">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value="Right ring finger middle joint" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SrF17">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value="Right little finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SrF18">
-	 <input name="Sjoint" type="checkbox" >  
+	 <input name="Sjoint"  value="Right little finger middle joint"  type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="SrKnee">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint" value="Right Knee"  type="checkbox" > 
 	 </div>
 	 
 	 
 	 <div class="GridCell" id="SlShoulder">
-	 <input name="Sjoint" type="checkbox" >  
+	 <input name="Sjoint"  value="left shoulder"  type="checkbox" >  
 	 </div>
 	 
 	 
 	 <div class="GridCell" id="SlElbow">
-	 <input name="Sjoint" type="checkbox" >  
+	 <input name="Sjoint"  value="Left Elbow" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="SlWrist">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"   value="Left Wrist"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SlF9">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint" value="Left thumb knuckle"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SlF10">
-	 <input name="Sjoint" type="checkbox" >  
+	 <input name="Sjoint"  value="joint at the top of Left thumb"  type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="SlF11">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value=" Left index finger knuckle"  type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SlF12">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value=" Left index finger middle joint"  type="checkbox" > 
 	  </div>
 	 
 	  <div class="GridCell" id="SlF13">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value="Left middle finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SlF14">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint" value=" Left middle finger middle joint" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SlF15">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value="Left ring finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SlF16">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value="Left ring finger middle joint" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SlF17">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint" value="Left little finger knuckle" type="checkbox" > 
 	 </div>
 	 
 	 <div class="GridCell" id="SlF18">
-	 <input name="Sjoint" type="checkbox" >  
+	 <input name="Sjoint"  value="Left little finger middle joint" type="checkbox" >  
 	 </div>
 	 
 	 <div class="GridCell" id="SlKnee">
-	 <input name="Sjoint" type="checkbox" > 
+	 <input name="Sjoint"  value=" Left Knee" type="checkbox" > 
 	 </div>
 <!-- 	 -------------------- -->
 	 	</div>
@@ -1434,7 +1470,8 @@
 				</table>
 				</li>
 			</ul>
-			<input type="Button" Value="Print" onclick="PrintPage()">
+			<input type="Button" Value="Submit" onclick="SumbitForm()">
+			<input type="Button" Value="Save/Print" onclick="PrintPage()">
 		</div>
 		 <p>
 		 Copyrights reserved &reg; <a href="http://www.rheumatology4u.com">www.rheumatology4u.com</a>
