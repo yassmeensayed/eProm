@@ -16,7 +16,9 @@
 	function SumbitForm(){ 
 		//if(isReadyForSending()){ 
 			$.post( "sendMail.php",{ message: generateSubmittedHTML()} 
-				 , alert( "success" ));
+				 ,function( data ) {
+    alert( "Data Loaded: " + data );
+  } );
 			alert ( generateSubmittedHTML());
 		//} 
 		//else 
