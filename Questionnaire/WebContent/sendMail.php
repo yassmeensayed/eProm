@@ -16,8 +16,7 @@ mail("mayokba@gmail.com","Eprom",$msg);
 //     $mail->SMTPSecure = "ssl"; // sets the prefix to the servier
 //     $mail->Host = "smtp.gmail.com"; // sets GMAIL as the SMTP server
 //     $mail->Port = 465; // set the SMTP port for the GMAIL server
-//     $mail->Username = "mayokba@gmail.com"; // GMAIL username
-//     $mail->Password = "bsmelah1"; // GMAIL password
+//     $mail->Username = "mayokba@gmail.com"; // GMAIL username 
 // }
 
 // //Typical mail data

@@ -45,7 +45,8 @@
 			isQ5Complete() && 
 			isQ6Complete() &&
 			isQ7Complete() && 			
-			isQ8Complete()){
+			isQ8Complete() &&
+            isPatientInfoComplete()) {
 			return true;
 		}
 		return false;
@@ -80,6 +81,18 @@
 		}
 		return false;
 	}
+	function isPatientInfoComplete() {
+	    if ($("#TextName").val().length > 0
+        && $("#TextDoB").val().length > 0
+        && $("#TextHosName").val().length > 0
+        && $("#TextHosNo").val().length > 0
+        && $("#TextDate").val().length > 0
+        ) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+    }
 	function isQ2Complete() {
 		if ($('[name="Q2"]').is(':checked')) {
 			return true;
@@ -513,6 +526,20 @@
 				answer</span>. Please answer exactly as<span class="notice"> YOU</span>
 			think or feel.
 		</h4>
+        <table >
+        <tr >
+        <td align="left" width="120px">
+        Name:</td><td align="left"> <input type="text" id="TextName"></td>
+        <td align="left" width="120px"> DoB:</td><td align="left"> <input type="text" id="TextDoB"></td>
+        </tr>
+        <tr>
+        <td align="left">
+        Hosptial Name:</td><td align="left"> <input type="text" id="TextHosName"></td>
+        <td align="left">Hosptial Number:</td><td align="left"> <input type="text" id="TextHosNo"></td></tr>
+        <tr>
+        <td align="left"></td><td align="left"> </td>
+        <td align="left">Date:</td><td align="left"> <input type="text" id="TextDate"></td></tr>
+        </table>
 		<div id="questions">
 			<ul style="list-style: none;">
 				<li class="question"><div class="questionHeader">
@@ -839,8 +866,8 @@
 					</div> 
 			<div>		
 <h3 id="PainfulJoints">Painful Joints:</h3> 
-	<div id="ContainerQ6" > 
-<!-- 	<img src="skeleton.jpg"> -->
+ 
+	<div id="ContainerQ6" ><img src="skeleton.jpg">  
 <!-- 	painful right side  -->
 	 <div class="GridCell" id="PrShoulder">
 	 <input name="Pjoint" value="rightShoulder" type="checkbox" >  
@@ -954,8 +981,8 @@
 	 
 	 <div class="GridCell" id="PlKnee">
 	 <input name="Pjoint" value=" Left Knee" type="checkbox" > 
-	 </div>
-	 </div>
+	 </div>  
+	 </div> 
 <!-- 	 ------------------------------------------ -->
 <h3 id="SwollenJoints">Swollen Joints:</h3>
 	<div id="ContainerQ6" > 

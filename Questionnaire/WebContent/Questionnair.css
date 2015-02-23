@@ -152,21 +152,23 @@ width: 2em;
 	 width:500px;
 	
    height:600px;
- overflow: hidden;
+ overflow: hidden; 
+ padding-left: 80px;
 /*    float:left; */
-   background-image: url(skeleton.jpg);
-   background-repeat: no-repeat;
-   background-position: 20px 60px;
+/*    background-image: url(skeleton.jpg); */
+/*    background-repeat: no-repeat; */
+/*    background-position: 20px 60px; */
    
   
 }
  
 #ContainerQ6 img {
-repeat: no-repeat;
+repeat: no-repeat; 
 position : absolute;
 /* position: 20px 60px; */
-/* left: 20px; */
-/*     top: 60px; */
+margin-left: -20%;
+/*     top: 60px;  */
+overflow: hidden; 
 float: left;
 z-index:-1;
 } 
